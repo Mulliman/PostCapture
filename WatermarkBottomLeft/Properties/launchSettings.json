@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WatermarkBottomLeft": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\Camera\\2020\\Disney\\Output\\test.jpg\""
+    }
+  }
+}

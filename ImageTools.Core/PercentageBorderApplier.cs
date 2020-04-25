@@ -36,6 +36,7 @@ namespace ImageTools.Core
 
             using (var clonedOriginal = image.Image.Clone())
             {
+                newImage.SetProfile(clonedOriginal.GetExifProfile());
                 newImage.Composite(clonedOriginal, Gravity.Center);
 
                 image.Image = newImage;

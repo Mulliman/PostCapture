@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Reflection;
 
-namespace WatermarkBottomLeft
+namespace WatermarkBottomRight
 {
     public class Program
     {
@@ -26,7 +25,7 @@ namespace WatermarkBottomLeft
 
             var watermarkLocation = new WatermarkLocation
             {
-                Location = Location.BottomLeft,
+                Location = Location.BottomRight,
                 ImageMarginPercentage = 2.5,
                 ImageSizePercentage = 15
             };

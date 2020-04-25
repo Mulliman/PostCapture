@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageTools.Core", "ImageToo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatermarkBottomLeft", "WatermarkBottomLeft\WatermarkBottomLeft.csproj", "{F6540360-2C99-46EF-A849-05131C7711EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatermarkBottomRight", "WatermarkBottomRight\WatermarkBottomRight.csproj", "{216924F4-2068-440C-BCEC-9C6585C21661}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F6540360-2C99-46EF-A849-05131C7711EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6540360-2C99-46EF-A849-05131C7711EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6540360-2C99-46EF-A849-05131C7711EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{216924F4-2068-440C-BCEC-9C6585C21661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{216924F4-2068-440C-BCEC-9C6585C21661}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{216924F4-2068-440C-BCEC-9C6585C21661}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{216924F4-2068-440C-BCEC-9C6585C21661}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

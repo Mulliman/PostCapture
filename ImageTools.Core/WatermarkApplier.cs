@@ -43,6 +43,11 @@ namespace ImageTools.Core
             if(location == Location.BottomLeft)
             {
                 y = mainImage.Image.Height - watermark.Image.Height - margin;
+            } 
+            else if(location == Location.BottomRight)
+            {
+                y = mainImage.Image.Height - watermark.Image.Height - margin;
+                x = mainImage.Image.Width - watermark.Image.Width - margin;
             }
 
             return new Point(x, y);

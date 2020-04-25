@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImageMagick;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -20,38 +21,28 @@ namespace ImageTools.Core
 
         public EditableImage Apply(EditableImage image)
         {
-            var bmp = image.Bitmap;
+            var bmp = image.Image;
 
             var shortestSide = bmp.Height > bmp.Width ? bmp.Width : bmp.Height;
             var margin = (int)Math.Round(shortestSide / 100 * WatermarkLocation.ImageMarginPercentage);
             var size = (int)Math.Round(shortestSide / 100 * WatermarkLocation.ImageSizePercentage);
 
-            var newImage = new Bitmap(bmp);
+            var sizedWatermark = WatermarkImage.ScaleImage(size);
+            var topLeft = GetTopLeftPoint(image, sizedWatermark, WatermarkLocation.Location, margin);
 
-            foreach (var id in image.Bitmap.PropertyIdList)
-                newImage.SetPropertyItem(image.Bitmap.GetPropertyItem(id));
-
-            using (Graphics gfx = Graphics.FromImage(newImage))
-            {
-                var sizedWatermark = WatermarkImage.ScaleImage(size);
-                var topLeft = GetTopLeftPoint(image.Bitmap, sizedWatermark, WatermarkLocation.Location, margin);
-
-                gfx.DrawImage(sizedWatermark, topLeft);
-            }
-
-            image.Bitmap = newImage;
+            image.Image.Composite(sizedWatermark.Image, topLeft.X, topLeft.Y, CompositeOperator.Over);
 
             return image;
         }
 
-        private Point GetTopLeftPoint(Image mainImage, Image watermark, Location location, int margin)
+        private Point GetTopLeftPoint(ImageFile mainImage, ImageFile watermark, Location location, int margin)
         {
             var x = margin;
             var y = margin;
 
             if(location == Location.BottomLeft)
             {
-                y = mainImage.Height - watermark.Height - margin;
+                y = mainImage.Image.Height - watermark.Image.Height - margin;
             }
 
             return new Point(x, y);

@@ -8,13 +8,13 @@ namespace ImageTools.Core
 {
     public class EditableImage : ImageFile
     {
-        public EditableImage(string path, Bitmap bitmap) : base (path, bitmap)
+        public EditableImage(string path) : base (path)
         {
         }
 
         public new static EditableImage FromFilePath(string path)
         {
-            return new EditableImage(path, GetImage(path));
+            return new EditableImage(path);
         }
 
         public virtual void Save()
@@ -27,7 +27,7 @@ namespace ImageTools.Core
 
             myEncoderParameters.Param[0] = myEncoderParameter;
 
-            Bitmap.Save(Path, jpgEncoder, myEncoderParameters);
+            Image.Write(Path);
         }
 
         private static ImageCodecInfo GetEncoder(ImageFormat format)

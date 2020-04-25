@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImageMagick;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -8,65 +9,50 @@ namespace ImageTools.Core
 {
     public class ImageFile
     {
-        public Bitmap Bitmap { get; set; }
+        public MagickImage Image { get; set; }
 
         public string Path { get; set; }
 
-        public ImageFile(string path, Bitmap bitmap)
+        public ImageFile(string path)
         {
             Path = path;
-            Bitmap = bitmap;
+            Image = new MagickImage(path);
         }
 
-        public static EditableImage FromFilePath(string path)
+        private ImageFile(string path, MagickImage image)
         {
-            return new EditableImage(path, GetImage(path));
+            Path = path;
+            Image = image;
         }
 
-        protected static Bitmap GetImage(string path)
+        public ImageFile ScaleImage(int maxWidth, int maxHeight)
         {
-            using (Stream stream = File.Open(path, FileMode.Open))
-            {
-                Bitmap imgsrc = (Bitmap)Bitmap.FromStream(stream);
-
-                return imgsrc;
-            }
-        }
-
-        public Image ScaleImage(int maxWidth, int maxHeight)
-        {
-            var ratioX = (double)maxWidth / Bitmap.Width;
-            var ratioY = (double)maxHeight / Bitmap.Height;
+            var ratioX = (double)maxWidth / Image.Width;
+            var ratioY = (double)maxHeight / Image.Height;
             var ratio = Math.Min(ratioX, ratioY);
 
-            var newWidth = (int)(Bitmap.Width * ratio);
-            var newHeight = (int)(Bitmap.Height * ratio);
+            var newWidth = (int)(Image.Width * ratio);
+            var newHeight = (int)(Image.Height * ratio);
 
-            var newImage = new Bitmap(newWidth, newHeight);
+            var newImage = new MagickImage(Image);
 
-            using (var graphics = Graphics.FromImage(newImage))
-            {
-                graphics.DrawImage(Bitmap, 0, 0, newWidth, newHeight);
-            }
+            newImage.Resize(newWidth, newHeight);
 
-            return newImage;
+            return new ImageFile(Path, newImage);
         }
 
-        public Image ScaleImage(int maxWidth)
+        public ImageFile ScaleImage(int maxWidth)
         {
-            var ratioX = (double)maxWidth / Bitmap.Width;
+            var ratioX = (double)maxWidth / Image.Width;
 
-            var newWidth = (int)(Bitmap.Width * ratioX);
-            var newHeight = (int)(Bitmap.Height * ratioX);
+            var newWidth = (int)(Image.Width * ratioX);
+            var newHeight = (int)(Image.Height * ratioX);
 
-            var newImage = new Bitmap(newWidth, newHeight);
+            var newImage = new MagickImage(Image);
 
-            using (var graphics = Graphics.FromImage(newImage))
-            {
-                graphics.DrawImage(Bitmap, 0, 0, newWidth, newHeight);
-            }
+            newImage.Resize(newWidth, newHeight);
 
-            return newImage;
+            return new ImageFile(Path, newImage);
         }
     }
 }

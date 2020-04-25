@@ -13,7 +13,7 @@ namespace WatermarkBottomLeft
         private static readonly Dictionary<Color, double> _borders = new Dictionary<Color, double>()
         {
             { Color.White, 0.25 },
-            { Color.Black, 4 }
+            { Color.Black, 2 }
         };
 
         public static string ImagePath { get; private set; }
@@ -27,7 +27,7 @@ namespace WatermarkBottomLeft
             var watermarkLocation = new WatermarkLocation
             {
                 Location = Location.BottomLeft,
-                ImageMarginPercentage = 3,
+                ImageMarginPercentage = 2.5,
                 ImageSizePercentage = 7
             };
 

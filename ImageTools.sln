@@ -9,11 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoubleBorder", "DoubleBorde
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageTools.Core", "ImageTools.Core\ImageTools.Core.csproj", "{04162E6C-350B-44E1-A3FF-D717F1EFC439}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatermarkBottomLeft", "WatermarkBottomLeft\WatermarkBottomLeft.csproj", "{F6540360-2C99-46EF-A849-05131C7711EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatermarkBottomLeft", "WatermarkBottomLeft\WatermarkBottomLeft.csproj", "{F6540360-2C99-46EF-A849-05131C7711EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatermarkBottomRight", "WatermarkBottomRight\WatermarkBottomRight.csproj", "{216924F4-2068-440C-BCEC-9C6585C21661}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatermarkBottomRight", "WatermarkBottomRight\WatermarkBottomRight.csproj", "{216924F4-2068-440C-BCEC-9C6585C21661}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostProcess", "PostProcess\PostProcess.csproj", "{5E5F90AA-BF62-4EF6-9D28-A33C724477D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostProcess", "PostProcess\PostProcess.csproj", "{5E5F90AA-BF62-4EF6-9D28-A33C724477D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageTools.Configurator", "ImageTools.Configurator\ImageTools.Configurator.csproj", "{B80FA184-B521-4DC0-9CA3-F362FAB3C00E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{5E5F90AA-BF62-4EF6-9D28-A33C724477D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E5F90AA-BF62-4EF6-9D28-A33C724477D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E5F90AA-BF62-4EF6-9D28-A33C724477D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B80FA184-B521-4DC0-9CA3-F362FAB3C00E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B80FA184-B521-4DC0-9CA3-F362FAB3C00E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B80FA184-B521-4DC0-9CA3-F362FAB3C00E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B80FA184-B521-4DC0-9CA3-F362FAB3C00E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

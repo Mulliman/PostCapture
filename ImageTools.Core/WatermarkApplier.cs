@@ -7,8 +7,20 @@ using System.Text;
 
 namespace ImageTools.Core
 {
+    [Serializable]
+    public class WatermarkApplierParams
+    {
+        public WatermarkLocation Location { get; set; }
+
+        public ImageFile WatermarkImage { get; set; }
+    }
+
     public class WatermarkApplier : IApplier
     {
+        public const string IdConst = "Watermark";
+
+        public string Id => IdConst;
+
         public WatermarkLocation WatermarkLocation { get; }
 
         public ImageFile WatermarkImage { get; }
@@ -17,6 +29,12 @@ namespace ImageTools.Core
         {
             WatermarkLocation = location;
             WatermarkImage = watermarkImage;
+        }
+
+        public WatermarkApplier(WatermarkApplierParams args)
+        {
+            WatermarkLocation = args.Location;
+            WatermarkImage = args.WatermarkImage;
         }
 
         public EditableImage Apply(EditableImage image)

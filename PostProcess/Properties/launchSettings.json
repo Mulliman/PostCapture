@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PostProcess": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\Camera\\2020\\Disney\\Output\\test-image.jpg\""
+    }
+  }
+}

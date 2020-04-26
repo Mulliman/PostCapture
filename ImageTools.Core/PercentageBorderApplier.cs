@@ -5,16 +5,38 @@ using System.Drawing.Drawing2D;
 
 namespace ImageTools.Core
 {
+    [Serializable]
+    public class PercentageBorderApplierParams
+    {
+        public double BorderWidthPercentage { get; set; }
+
+        public int R { get; set; }
+
+        public int G { get; set; }
+
+        public int B { get; set; }
+    }
+
     public class PercentageBorderApplier : IApplier
     {
+        public const string IdConst = "PercentageBorder";
+
         public double BorderWidthPercentage { get; }
 
         public Color Colour { get; }
+
+        public string Id => IdConst;
 
         public PercentageBorderApplier(double percentageWidth, Color colour)
         {
             BorderWidthPercentage = percentageWidth;
             Colour = colour;
+        }
+
+        public PercentageBorderApplier(PercentageBorderApplierParams args)
+        {
+            BorderWidthPercentage = args.BorderWidthPercentage;
+            Colour = Color.FromArgb(args.R, args.G, args.B);
         }
 
         public EditableImage Apply(EditableImage image)

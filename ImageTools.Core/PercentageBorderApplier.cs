@@ -1,5 +1,6 @@
 ﻿using ImageMagick;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -39,6 +40,10 @@ namespace ImageTools.Core
             Colour = Color.FromArgb(args.R, args.G, args.B);
         }
 
+        public PercentageBorderApplier(Dictionary<string,string> parameters) : this(CreateArgsFromDictionary(parameters))
+        {
+        }
+
         public EditableImage Apply(EditableImage image)
         {
             var bmp = image.Image;
@@ -65,6 +70,17 @@ namespace ImageTools.Core
 
                 return image;
             }
+        }
+
+        public static PercentageBorderApplierParams CreateArgsFromDictionary(Dictionary<string, string> parameters)
+        {
+            return new PercentageBorderApplierParams()
+            {
+                BorderWidthPercentage = double.Parse(parameters["BorderWidthPercentage"]),
+                R = int.Parse(parameters["R"]),
+                G = int.Parse(parameters["G"]),
+                B = int.Parse(parameters["B"])
+            };
         }
     }
 }

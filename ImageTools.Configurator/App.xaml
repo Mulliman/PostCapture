@@ -4,6 +4,46 @@
              xmlns:local="clr-namespace:ImageTools.Configurator"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="CaptureOne" TargetType="{x:Type Control}">
+            <Setter Property="Foreground" Value="#A0A0A0" />
+            <Setter Property="FontStyle" Value="Normal" />
+        </Style>
+
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="#A0A0A0" />
+            <Setter Property="FontStyle" Value="Normal" />
+        </Style>
+
+        <Style TargetType="{x:Type ListBox}">
+            <Setter Property="Foreground" Value="#A0A0A0" />
+            <Setter Property="Background" Value="#232323" />
+            <Setter Property="FontStyle" Value="Normal" />
+        </Style>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="#A0A0A0" />
+            <Setter Property="Background" Value="#232323" />
+            <Setter Property="FontStyle" Value="Normal" />
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Foreground" Value="#A0A0A0" />
+            <Setter Property="Background" Value="#232323" />
+            <Setter Property="FontStyle" Value="Normal" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+
+        <Style TargetType="{x:Type Slider}">
+            <Setter Property="Foreground" Value="#A0A0A0" />
+            <Setter Property="FontStyle" Value="Normal" />
+            <Setter Property="TickPlacement" Value="None" />
+        </Style>
+
+        <Style TargetType="{x:Type ScrollBar}">
+            <Setter Property="Background" Value="#191919"/>
+            <Setter Property="Foreground" Value="#232323"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Width" Value="1"/>
+        </Style>
     </Application.Resources>
 </Application>

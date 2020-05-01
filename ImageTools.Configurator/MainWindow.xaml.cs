@@ -39,26 +39,29 @@ namespace ImageTools.Configurator
             };
 
             OperationsListBox.ItemsSource = Forms;
+
+            DataContext = this;
         }
 
-        public List<ProcessConfiguration> Processes { get; set; }
+        public List<ProcessConfigurationFile> Processes { get; set; }
 
         public Dictionary<string, IApplierFormBuilder>  Forms { get; set; }
 
+        public ProcessConfigurationFile SelectedProcessFile { get; set; }
+
         private void ConfigsListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            SelectedProcessFile = ConfigsListBox.SelectedItem as ProcessConfigurationFile;
+
+            ProcessNameTextBox.Text = SelectedProcessFile.Id;
+            MatchPropertyTextBox.Text = SelectedProcessFile.MatchProperty;
+            MatchValueTextBox.Text = SelectedProcessFile.MatchValue;
+
             ProcessOperationsPanel.Children.Clear();
 
-            var selected = ConfigsListBox.SelectedItem as ProcessConfiguration;
-
-            var config = Processes.FirstOrDefault(c => c.Id.ToLower() == selected.Id.ToLower());
-
-            var list = new List<IApplier>();
-            var builder = new ApplierBuilder();
-
-            foreach (var step in config.Steps)
+            foreach (var step in SelectedProcessFile.Steps)
             {
-                if(Forms.ContainsKey(step.Id))
+                if (Forms.ContainsKey(step.Id))
                 {
                     var control = Forms[step.Id].Build(step.Parameters);
                     ProcessOperationsPanel.Children.Add(control);
@@ -66,9 +69,29 @@ namespace ImageTools.Configurator
             }
         }
 
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Do you want to overwrite the existing file?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                var processFile = SelectedProcessFile;
 
+                var steps = new List<ProcessStepConfiguration>();
 
+                foreach (var control in ProcessOperationsPanel.Children.Cast<ApplierFormUserControl>())
+                {
+                    var data = control.GetData();
+                    steps.Add(data);
+                }
 
+                processFile.Steps = steps;
+                processFile.Id = SelectedProcessFile.Id;
+                processFile.MatchProperty = SelectedProcessFile.MatchProperty;
+                processFile.MatchValue = SelectedProcessFile.MatchValue;
+                processFile.Id = SelectedProcessFile.Id;
+
+                _processRepo.SaveProcessConfigurationFile(processFile);
+            }
+        }
 
         #region Window Functionality 
 

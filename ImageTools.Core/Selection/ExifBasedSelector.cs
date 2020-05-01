@@ -9,7 +9,7 @@ namespace ImageTools.Core.Selection
 {
     public class ExifBasedSelector
     {
-        private List<ProcessConfiguration> _configs;
+        private List<ProcessConfigurationFile> _configs;
 
         public ExifBasedSelector()
         {

@@ -1,4 +1,5 @@
 ﻿using ImageTools.Core;
+using ImageTools.Core.Selection;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +9,6 @@ namespace ImageTools.Configurator.ApplierForms
 {
     public interface IApplierForm<T> where T : IApplier
     {
-
+        //ProcessStepConfiguration GetData();
     }
 }

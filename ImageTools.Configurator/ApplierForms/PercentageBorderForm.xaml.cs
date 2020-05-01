@@ -1,23 +1,23 @@
 ﻿using ImageTools.Core;
+using ImageTools.Core.Selection;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ImageTools.Configurator.ApplierForms
 {
+    public abstract class ApplierFormUserControl : UserControl
+    {
+        public abstract ProcessStepConfiguration GetData();
+    }
+
     /// <summary>
     /// Interaction logic for PercentageBorderForm.xaml
     /// </summary>
-    public partial class PercentageBorderForm : UserControl, IApplierForm<PercentageBorderApplier>
+    public partial class PercentageBorderForm : ApplierFormUserControl, IApplierForm<PercentageBorderApplier>
     {
         public double PercentageBorderWidth { get; set; }
 
@@ -31,7 +31,7 @@ namespace ImageTools.Configurator.ApplierForms
         {
             InitializeComponent();
 
-            this.DataContext = this;
+            base.DataContext = this;
         }
 
         public PercentageBorderForm(PercentageBorderApplier applier)
@@ -43,7 +43,7 @@ namespace ImageTools.Configurator.ApplierForms
             Green = applier.Colour.G;
             Blue = applier.Colour.B;
 
-            this.DataContext = this;
+            base.DataContext = this;
         }
 
         private void ColorSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -63,11 +63,26 @@ namespace ImageTools.Configurator.ApplierForms
                 DemoLine.Height = PercentageBorderWidthSlider.Value;
             }
         }
+
+        public override ProcessStepConfiguration GetData()
+        {
+            return new ProcessStepConfiguration
+            {
+                Id = PercentageBorderApplier.IdConst,
+                Parameters = new Dictionary<string, string>
+                {
+                    { "BorderWidthPercentage", this.PercentageBorderWidth.ToString() },
+                    { "R", this.Red.ToString() },
+                    { "G", this.Green.ToString() },
+                    { "B", this.Blue.ToString() },
+                }
+            };
+        }
     }
 
     public class PercentageBorderFormBuilder : IApplierFormBuilder
     {
-        public UserControl Build(Dictionary<string, string> parameters)
+        public ApplierFormUserControl Build(Dictionary<string, string> parameters)
         {
             var applier = new PercentageBorderApplier(parameters);
             return new PercentageBorderForm(applier);

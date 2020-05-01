@@ -4,6 +4,6 @@ namespace ImageTools.Configurator.ApplierForms
 {
     public interface IApplierFormBuilder
     {
-        public abstract UserControl Build(System.Collections.Generic.Dictionary<string, string> parameters);
+        public abstract ApplierFormUserControl Build(System.Collections.Generic.Dictionary<string, string> parameters);
     }
 }

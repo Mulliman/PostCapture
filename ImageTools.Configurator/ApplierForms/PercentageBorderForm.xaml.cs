@@ -4,15 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace ImageTools.Configurator.ApplierForms
 {
-    public abstract class ApplierFormUserControl : UserControl
-    {
-        public abstract ProcessStepConfiguration GetData();
-    }
 
     /// <summary>
     /// Interaction logic for PercentageBorderForm.xaml
@@ -54,6 +49,8 @@ namespace ImageTools.Configurator.ApplierForms
             {
                 DemoLine.Fill = new SolidColorBrush(color);
             }
+
+            SendOnUpdateEvent(sender, e);
         }
 
         private void WidthSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -62,6 +59,8 @@ namespace ImageTools.Configurator.ApplierForms
             {
                 DemoLine.Height = PercentageBorderWidthSlider.Value;
             }
+
+            SendOnUpdateEvent(sender, e);
         }
 
         public override ProcessStepConfiguration GetData()

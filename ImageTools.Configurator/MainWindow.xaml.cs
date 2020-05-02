@@ -70,9 +70,16 @@ namespace ImageTools.Configurator
                 {
                     var control = Forms[step.Id].Build(step.Parameters);
                     ProcessOperationsPanel.Children.Add(control);
+                    control.OnUpdate += new EventHandler(ShowUpdatedPreviewImageFromEvent);
                 }
             }
 
+            ShowUpdatedPreviewImage();
+        }
+
+        private void ShowUpdatedPreviewImageFromEvent(object sender, EventArgs args)
+        {
+            SelectedProcessFile = GetProcessFileFromCurrentUiState();
             ShowUpdatedPreviewImage();
         }
 
@@ -108,24 +115,33 @@ namespace ImageTools.Configurator
         {
             if (MessageBox.Show("Do you want to overwrite the existing file?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                var processFile = SelectedProcessFile;
-
-                var steps = new List<ProcessStepConfiguration>();
-
-                foreach (var control in ProcessOperationsPanel.Children.Cast<ApplierFormUserControl>())
-                {
-                    var data = control.GetData();
-                    steps.Add(data);
-                }
-
-                processFile.Steps = steps;
-                processFile.Id = SelectedProcessFile.Id;
-                processFile.MatchProperty = SelectedProcessFile.MatchProperty;
-                processFile.MatchValue = SelectedProcessFile.MatchValue;
-                processFile.Id = SelectedProcessFile.Id;
+                ProcessConfigurationFile processFile = GetProcessFileFromCurrentUiState();
 
                 _processRepo.SaveProcessConfigurationFile(processFile);
+
+                SelectedProcessFile = processFile;
             }
+        }
+
+        private ProcessConfigurationFile GetProcessFileFromCurrentUiState()
+        {
+            var processFile = SelectedProcessFile;
+
+            var steps = new List<ProcessStepConfiguration>();
+
+            foreach (var control in ProcessOperationsPanel.Children.Cast<ApplierFormUserControl>())
+            {
+                var data = control.GetData();
+                steps.Add(data);
+            }
+
+            processFile.Steps = steps;
+            processFile.Id = SelectedProcessFile.Id;
+            processFile.MatchProperty = SelectedProcessFile.MatchProperty;
+            processFile.MatchValue = SelectedProcessFile.MatchValue;
+            processFile.Id = SelectedProcessFile.Id;
+
+            return processFile;
         }
 
         #region Window Functionality 

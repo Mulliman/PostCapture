@@ -3,6 +3,7 @@ using ImageTools.Core.Selection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Printing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -91,23 +92,25 @@ namespace ImageTools.Configurator.ApplierForms
 
         private void BrowseButton_Click(object sender, RoutedEventArgs e)
         {
-            // Create OpenFileDialog
-            Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog();
+            Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "Image files|*.png;*.jpeg;*.jpg;*.gif"
+            };
 
-            fileDialog.Filter = "Image files|*.png;*.jpeg;*.jpg;*.gif";
-
-            // Launch OpenFileDialog by calling ShowDialog method
             var result = fileDialog.ShowDialog();
 
-            // Get the selected file name and display in a TextBox.
-            // Load content of file in a TextBlock
             if (result == true)
             {
                 WatermarkImage = fileDialog.FileName;
                 FileNameTextBox.Text = WatermarkImage;
+                SetUpImage();
+                ValueChanged(sender, e);
             }
+        }
 
-            SetUpImage();
+        private void ValueChanged(object sender, EventArgs e)
+        {
+            SendOnUpdateEvent(sender, e);
         }
     }
 

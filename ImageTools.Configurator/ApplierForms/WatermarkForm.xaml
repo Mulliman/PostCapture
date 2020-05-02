@@ -39,18 +39,18 @@
                         <DockPanel Margin="2">
                             <Label DockPanel.Dock="Left" FontWeight="Bold" VerticalAlignment="Center" Width="75">Margin %:</Label>
                             <TextBox Text="{Binding ElementName=MarginSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" DockPanel.Dock="Right" TextAlignment="Right" Width="40" Margin="10,0,0,0"  />
-                            <Slider Maximum="20" TickFrequency="0.25" IsSnapToTickEnabled="True" Name="MarginSlider" VerticalAlignment="Center" Value="{Binding PercentageMargin}" />
+                            <Slider Maximum="20" TickFrequency="0.25" IsSnapToTickEnabled="True" Name="MarginSlider" VerticalAlignment="Center" Value="{Binding PercentageMargin}" ValueChanged="ValueChanged" />
                         </DockPanel>
 
                         <DockPanel Margin="2">
                             <Label DockPanel.Dock="Left" FontWeight="Bold" VerticalAlignment="Center" Width="75">Size %:</Label>
                             <TextBox Text="{Binding ElementName=SizeSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" DockPanel.Dock="Right" TextAlignment="Right" Width="40"  Margin="10,0,0,0" />
-                            <Slider Maximum="100" TickFrequency="1" IsSnapToTickEnabled="True" Name="SizeSlider" VerticalAlignment="Center" Value="{Binding PercentageSize}" />
+                            <Slider Maximum="100" TickFrequency="1" IsSnapToTickEnabled="True" Name="SizeSlider" VerticalAlignment="Center" Value="{Binding PercentageSize}" ValueChanged="ValueChanged" />
                         </DockPanel>
 
                         <DockPanel Margin="2">
                             <Label DockPanel.Dock="Left" FontWeight="Bold" VerticalAlignment="Center" Width="75">Location:</Label>
-                            <ComboBox Name="LocationComboBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" SelectedItem="{Binding Location}" />
+                            <ComboBox Name="LocationComboBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" SelectedItem="{Binding Location}" SelectionChanged="ValueChanged" />
                         </DockPanel>
                     </StackPanel>
                 </DockPanel>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImageMagick;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -9,6 +10,10 @@ namespace ImageTools.Core
     public class EditableImage : ImageFile
     {
         public EditableImage(string path) : base (path)
+        {
+        }
+
+        public EditableImage(string path, MagickImage image) : base(path, image)
         {
         }
 

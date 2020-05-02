@@ -16,10 +16,18 @@ namespace ImageTools.Core
         public ImageFile(string path)
         {
             Path = path;
-            Image = new MagickImage(path);
+
+            if(path.EndsWith(".jpg") || path.EndsWith(".jpeg"))
+            {
+                Image = new MagickImage(path, new MagickReadSettings { Format = MagickFormat.Jpg });
+            }
+            else
+            {
+                Image = new MagickImage(path);
+            }
         }
 
-        private ImageFile(string path, MagickImage image)
+        protected ImageFile(string path, MagickImage image)
         {
             Path = path;
             Image = image;

@@ -5,12 +5,16 @@ using ImageTools.Core.Selection;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace ImageTools.Configurator
 {
@@ -68,6 +72,36 @@ namespace ImageTools.Configurator
                     ProcessOperationsPanel.Children.Add(control);
                 }
             }
+
+            ShowUpdatedPreviewImage();
+        }
+
+        private void ShowUpdatedPreviewImage()
+        {
+            var testImageMemoryStream = new MemoryStream();
+            Properties.Resources.TestImage.Save(testImageMemoryStream, ImageFormat.Jpeg);
+            testImageMemoryStream.Seek(0, SeekOrigin.Begin);
+
+            var exampleImage = new EditableImage("test.jpg", new ImageMagick.MagickImage(testImageMemoryStream));
+            var builder = new ApplierBuilder();
+
+            foreach (var step in SelectedProcessFile.Steps)
+            {
+                var applier = builder.CreateApplier(step);
+                exampleImage = applier.Apply(exampleImage);
+            }
+
+            var memoryStream = new MemoryStream();
+            memoryStream.Seek(0, SeekOrigin.Begin);
+            exampleImage.Image.Write(memoryStream, ImageMagick.MagickFormat.Jpg);
+            memoryStream.Seek(0, SeekOrigin.Begin);
+
+            var imageSource = new BitmapImage();
+            imageSource.BeginInit();
+            imageSource.StreamSource = memoryStream;
+            imageSource.EndInit();
+
+            PreviewImage.Source = imageSource;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)

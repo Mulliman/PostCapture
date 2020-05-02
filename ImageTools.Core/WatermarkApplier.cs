@@ -37,6 +37,10 @@ namespace ImageTools.Core
             WatermarkImage = args.WatermarkImage;
         }
 
+        public WatermarkApplier(Dictionary<string,string> parameters) : this(CreateArgsFromDictionary(parameters))
+        {
+        }
+
         public EditableImage Apply(EditableImage image)
         {
             var bmp = image.Image;
@@ -69,6 +73,22 @@ namespace ImageTools.Core
             }
 
             return new Point(x, y);
+        }
+
+        public static WatermarkApplierParams CreateArgsFromDictionary(Dictionary<string, string> parameters)
+        {
+            var watermarkPath = parameters["WatermarkImage"];
+
+            return new WatermarkApplierParams()
+            {
+                Location = new WatermarkLocation
+                {
+                    ImageMarginPercentage = double.Parse(parameters["ImageMarginPercentage"]),
+                    ImageSizePercentage = double.Parse(parameters["ImageSizePercentage"]),
+                    Location = Enum.Parse<Location>(parameters["Location"]),
+                },
+                WatermarkImage = new ImageFile(watermarkPath)
+            };
         }
     }
 

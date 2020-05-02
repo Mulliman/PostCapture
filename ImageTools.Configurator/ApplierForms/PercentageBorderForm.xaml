@@ -19,21 +19,21 @@
                 <Label  FontWeight="Bold" DockPanel.Dock="Top" Padding="0, 5">Border Colour</Label>
                 <StackPanel>
                     <DockPanel Margin="2">
-                        <Label DockPanel.Dock="Left" FontWeight="Bold">R:</Label>
-                        <TextBox Text="{Binding ElementName=RedSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                        <Slider Maximum="255" TickFrequency="5" IsSnapToTickEnabled="True" Name="RedSlider" Value="{Binding Red}" ValueChanged="ColorSlider_ValueChanged" />
+                        <Label DockPanel.Dock="Left" FontWeight="Bold" VerticalAlignment="Center">R:</Label>
+                        <TextBox Text="{Binding ElementName=RedSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" VerticalAlignment="Center" TextAlignment="Right" Width="40" />
+                        <Slider Maximum="255" TickFrequency="5" IsSnapToTickEnabled="True" Name="RedSlider" Value="{Binding Red}" VerticalAlignment="Center" ValueChanged="ColorSlider_ValueChanged" />
                     </DockPanel>
 
                     <DockPanel Margin="2">
-                        <Label DockPanel.Dock="Left" FontWeight="Bold">G:</Label>
-                        <TextBox Text="{Binding ElementName=GreenSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                        <Slider Maximum="255" TickFrequency="5" IsSnapToTickEnabled="True" Name="GreenSlider" Value="{Binding Green}" ValueChanged="ColorSlider_ValueChanged" />
+                        <Label DockPanel.Dock="Left" FontWeight="Bold" VerticalAlignment="Center">G:</Label>
+                        <TextBox Text="{Binding ElementName=GreenSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                        <Slider Maximum="255" TickFrequency="5" IsSnapToTickEnabled="True" Name="GreenSlider" Value="{Binding Green}" VerticalAlignment="Center" ValueChanged="ColorSlider_ValueChanged" />
                     </DockPanel>
 
                     <DockPanel  Margin="2">
-                        <Label DockPanel.Dock="Left" FontWeight="Bold">B:</Label>
-                        <TextBox Text="{Binding ElementName=BlueSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                        <Slider Maximum="255" TickFrequency="5" IsSnapToTickEnabled="True" Name="BlueSlider" Value="{Binding Blue}" ValueChanged="ColorSlider_ValueChanged" />
+                        <Label DockPanel.Dock="Left" FontWeight="Bold" VerticalAlignment="Center">B:</Label>
+                        <TextBox Text="{Binding ElementName=BlueSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                        <Slider Maximum="255" TickFrequency="5" IsSnapToTickEnabled="True" Name="BlueSlider" Value="{Binding Blue}" VerticalAlignment="Center" ValueChanged="ColorSlider_ValueChanged" />
                     </DockPanel>
                 </StackPanel>
             </DockPanel>

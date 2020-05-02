@@ -35,7 +35,8 @@ namespace ImageTools.Configurator
 
             Forms = new Dictionary<string, IApplierFormBuilder>
             {
-                { PercentageBorderApplier.IdConst, new PercentageBorderFormBuilder() }
+                { PercentageBorderApplier.IdConst, new PercentageBorderFormBuilder() },
+                { WatermarkApplier.IdConst, new WatermarkFormBuilder() }
             };
 
             OperationsListBox.ItemsSource = Forms;

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImageTools.Configurator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1500" Background="#191919" Style="{StaticResource CaptureOne}" WindowStyle="None">
+        Title="MainWindow" Height="800" Width="1500" Background="{StaticResource BackgroundColour}" WindowStyle="None">
 
     <DockPanel x:Name="RootWindow">
         <DockPanel x:Name="TitleBar" DockPanel.Dock="Top" MouseDown="TitleBar_MouseDown">
@@ -33,8 +33,12 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 
-                <StackPanel Grid.Column="0" Grid.Row="0" Margin="10" Background="#2D2D2D">
-                    <Label Content="Processes" />
+                <StackPanel Grid.Column="0" Grid.Row="0" Margin="10">
+                    <DockPanel Margin="0,0,0,10" Background="#666">
+                        <Label Content="Processes" Foreground="#000" VerticalAlignment="Center" FontWeight="Bold" Padding="10,0,5,0" DockPanel.Dock="Left" />
+                        <Button Content="+" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Padding="5" BorderThickness="0" Click="SaveButton_Click"  DockPanel.Dock="Right" Width="20"/>
+                    </DockPanel>
+
                     <ListBox Name="ConfigsListBox"  Grid.Column="0" Margin="0,10,0,10" BorderThickness="0" SelectionChanged="ConfigsListBox_SelectionChanged">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -44,9 +48,11 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
+
+                    
                 </StackPanel>
 
-                <Grid Grid.Column="1" Grid.Row="0" Margin="10" Background="#111">
+                <Grid Grid.Column="1" Grid.Row="0" Margin="10" Background="{StaticResource PanelBackgroundColour}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
@@ -54,57 +60,62 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Name="ActionsBar" Grid.Row="0">
-                        <DockPanel Margin="0,0,0,10" Background="#A0A0A0">
-                            <Label Content="Process name" Foreground="#111" VerticalAlignment="Center" FontWeight="Bold" Padding="10,0,5,0" />
-                            <TextBox Name="ProcessNameTextBox" VerticalAlignment="Center" HorizontalAlignment="Stretch" Foreground="#A0A0A0" Background="#111" Margin="5" Padding="5" />
+                        <DockPanel>
+                            <Border BorderBrush="{StaticResource CaptureDoneOrangeBrush}" BorderThickness="0,0,0,1" Padding="10">
+                                <DockPanel>
+                                    <Label VerticalAlignment="Center" Padding="10,0,5,0">
+                                        <TextBlock Foreground="{StaticResource CaptureDoneOrangeBrush}">Process Name</TextBlock>
+                                    </Label>
+                                    <TextBox Name="ProcessNameTextBox" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="5" Padding="5" />
+                                </DockPanel>
+                            </Border>
                         </DockPanel>
 
-                        <StackPanel Name="DetailsBar" Margin="10">
-                            <DockPanel Margin="10">
-                                <Label FontWeight="Bold">
-                                    <TextBlock TextDecorations="Underline">This process will be applied when:</TextBlock>
-                                </Label>
-                            </DockPanel>
+                        <StackPanel Name="DetailsBar" Margin="0">
+                            <Border BorderBrush="{StaticResource BackgroundColour}" BorderThickness="0,0,0,1" Padding="10">
+                                <StackPanel>
+                                    <DockPanel Margin="5,10">
+                                        <Label FontWeight="Bold">
+                                            <TextBlock TextDecorations="Underline">This process will be applied when:</TextBlock>
+                                        </Label>
+                                    </DockPanel>
 
-                            <DockPanel Margin="5">
-                                <Label Content="The value in this EXIF category" Width="250" />
-                                <!--Text="{Binding SelectedProcessFile.MatchProperty}"-->
-                                <TextBox Name="MatchPropertyTextBox"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0" />
-                            </DockPanel>
-                            <DockPanel Margin="5">
-                                <Label Content="Matches this value" Width="250"/>
-                                <!--Text="{Binding SelectedProcessFile.MatchValue}"-->
-                                <TextBox Name="MatchValueTextBox"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0" />
-                            </DockPanel>
+                                    <DockPanel Margin="5">
+                                        <Label Content="The value in this EXIF category" Width="250" />
+                                        <!--Text="{Binding SelectedProcessFile.MatchProperty}"-->
+                                        <TextBox Name="MatchPropertyTextBox"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0" />
+                                    </DockPanel>
+                                    <DockPanel Margin="5">
+                                        <Label Content="Matches this value" Width="250"/>
+                                        <!--Text="{Binding SelectedProcessFile.MatchValue}"-->
+                                        <TextBox Name="MatchValueTextBox"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0" />
+                                    </DockPanel>
+                                </StackPanel>
+                            </Border>
                         </StackPanel>
 
-                        <StackPanel Margin="20,10">
-                            <Label FontWeight="Bold">
+                        <StackPanel Margin="0">
+                            <Label FontWeight="Bold" Margin="15">
                                 <TextBlock TextDecorations="Underline">The operations will be performed in the following order:</TextBlock>
                             </Label>
                         </StackPanel>
                     </StackPanel>
 
-                    <ScrollViewer Grid.Row="1" VerticalAlignment="Stretch" Name="MainScrollArea" VerticalScrollBarVisibility="Visible">
-                        <StackPanel Name="ProcessOperationsPanel" Margin="50,10"  />
+                    <ScrollViewer Grid.Row="1" VerticalAlignment="Stretch" Name="MainScrollArea" VerticalScrollBarVisibility="Visible" Margin="50,10" Padding="0,0,15,0">
+                        <StackPanel Margin="0" Name="ProcessOperationsPanel" />
                     </ScrollViewer>
-
-                    <StackPanel Margin="10" Grid.Row="2">
-                        <Button Content="Save" Click="SaveButton_Click"/>
-                    </StackPanel>
                 </Grid>
 
-                <!--<StackPanel Name="MainScrollArea" Grid.Column="1" Grid.Row="0" Margin="10">
-                    
-                </StackPanel>-->
-
-                <!--<ScrollViewer Name="MainScrollArea" Grid.Column="1" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch">
-                    
-                </ScrollViewer>-->
-
-
                 <StackPanel Grid.Column="2" Grid.Row="0" Margin="10" Background="#2D2D2D">
-                    <Label Content="Operations" />
+                    <Label Content="Operations" Margin="0,5,0,5" />
+                    <StackPanel Margin="10">
+                        <Button Content="Save" Margin="0,0,0,10" Padding="10" Click="SaveButton_Click"/>
+                        <Button Content="Duplicate" Margin="0,0,0,10" Padding="5" Click="SaveButton_Click"/>
+                        <Button Content="Delete" Margin="0,0,0,10" Padding="5" Click="SaveButton_Click"/>
+                    </StackPanel>
+
+                    <Label Content="Add new operation" Margin="0,5,0,5" />
+
                     <ListBox Name="OperationsListBox"  Grid.Column="0" Margin="0,10,0,10" BorderThickness="0">
                         <ListBox.ItemTemplate>
                             <DataTemplate>

@@ -4,41 +4,47 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ImageTools.Configurator.ApplierForms"
-             mc:Ignorable="d" Padding="10" Margin="0 10" Background="#232323" MinWidth="300" MinHeight="100" Style="{StaticResource CaptureOne}">
+             mc:Ignorable="d" Padding="10" Margin="0, 0, 0, 1" Background="{StaticResource BackgroundColour}" MinWidth="300">
     <Grid>
-        <StackPanel>
-            <Label Content="Percentage Border" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Expander IsExpanded="True">
+            <Expander.Header>
+                <Label HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock Foreground="{StaticResource CaptureDoneOrangeBrush}">Percentage Border</TextBlock>
+                </Label>
+            </Expander.Header>
 
-            <DockPanel VerticalAlignment="Center" Margin="10">
-                <Label  FontWeight="Bold" DockPanel.Dock="Top" Padding="0, 5">Percentage Border Width</Label>
-                <TextBox Text="{Binding ElementName=PercentageBorderWidthSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                <Slider Minimum="0.25" Maximum="25" Value="{Binding PercentageBorderWidth}" TickFrequency="0.25" IsSnapToTickEnabled="True" DockPanel.Dock="Left" Name="PercentageBorderWidthSlider" ValueChanged="WidthSlider_ValueChanged" />
-            </DockPanel>
+            <StackPanel>
+                <DockPanel VerticalAlignment="Center" Margin="10">
+                    <Label  FontWeight="Bold" DockPanel.Dock="Top" Padding="0, 5">Percentage Border Width</Label>
+                    <TextBox Text="{Binding ElementName=PercentageBorderWidthSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" Margin="10,0,0,0" />
+                    <Slider Minimum="0.25" Maximum="25" Value="{Binding PercentageBorderWidth}" TickFrequency="0.25" IsSnapToTickEnabled="True" DockPanel.Dock="Left" Name="PercentageBorderWidthSlider" ValueChanged="WidthSlider_ValueChanged" />
+                </DockPanel>
 
-            <DockPanel VerticalAlignment="Center" Margin="10,0">
-                <Label  FontWeight="Bold" DockPanel.Dock="Top" Padding="0, 5">Border Colour</Label>
-                <StackPanel>
-                    <DockPanel Margin="2">
-                        <Label DockPanel.Dock="Left" FontWeight="Bold" VerticalAlignment="Center">R:</Label>
-                        <TextBox Text="{Binding ElementName=RedSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" VerticalAlignment="Center" TextAlignment="Right" Width="40" />
-                        <Slider Maximum="255" TickFrequency="5" IsSnapToTickEnabled="True" Name="RedSlider" Value="{Binding Red}" VerticalAlignment="Center" ValueChanged="ColorSlider_ValueChanged" />
-                    </DockPanel>
+                <DockPanel VerticalAlignment="Center" Margin="10,0">
+                    <Label  FontWeight="Bold" DockPanel.Dock="Top" Padding="0, 5">Border Colour</Label>
+                    <StackPanel>
+                        <DockPanel Margin="2">
+                            <Label DockPanel.Dock="Left" FontWeight="Bold" VerticalAlignment="Center">R:</Label>
+                            <TextBox Text="{Binding ElementName=RedSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" VerticalAlignment="Center" TextAlignment="Right" Width="40" Margin="10,0,0,0" />
+                            <Slider Maximum="255" TickFrequency="5" IsSnapToTickEnabled="True" Name="RedSlider" Value="{Binding Red}" VerticalAlignment="Center" ValueChanged="ColorSlider_ValueChanged" />
+                        </DockPanel>
 
-                    <DockPanel Margin="2">
-                        <Label DockPanel.Dock="Left" FontWeight="Bold" VerticalAlignment="Center">G:</Label>
-                        <TextBox Text="{Binding ElementName=GreenSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                        <Slider Maximum="255" TickFrequency="5" IsSnapToTickEnabled="True" Name="GreenSlider" Value="{Binding Green}" VerticalAlignment="Center" ValueChanged="ColorSlider_ValueChanged" />
-                    </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label DockPanel.Dock="Left" FontWeight="Bold" VerticalAlignment="Center">G:</Label>
+                            <TextBox Text="{Binding ElementName=GreenSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" DockPanel.Dock="Right" TextAlignment="Right" Width="40" Margin="10,0,0,0" />
+                            <Slider Maximum="255" TickFrequency="5" IsSnapToTickEnabled="True" Name="GreenSlider" Value="{Binding Green}" VerticalAlignment="Center" ValueChanged="ColorSlider_ValueChanged" />
+                        </DockPanel>
 
-                    <DockPanel  Margin="2">
-                        <Label DockPanel.Dock="Left" FontWeight="Bold" VerticalAlignment="Center">B:</Label>
-                        <TextBox Text="{Binding ElementName=BlueSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                        <Slider Maximum="255" TickFrequency="5" IsSnapToTickEnabled="True" Name="BlueSlider" Value="{Binding Blue}" VerticalAlignment="Center" ValueChanged="ColorSlider_ValueChanged" />
-                    </DockPanel>
-                </StackPanel>
-            </DockPanel>
+                        <DockPanel  Margin="2">
+                            <Label DockPanel.Dock="Left" FontWeight="Bold" VerticalAlignment="Center">B:</Label>
+                            <TextBox Text="{Binding ElementName=BlueSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" DockPanel.Dock="Right" TextAlignment="Right" Width="40" Margin="10,0,0,0" />
+                            <Slider Maximum="255" TickFrequency="5" IsSnapToTickEnabled="True" Name="BlueSlider" Value="{Binding Blue}" VerticalAlignment="Center" ValueChanged="ColorSlider_ValueChanged" />
+                        </DockPanel>
+                    </StackPanel>
+                </DockPanel>
 
-            <Rectangle Name="DemoLine" HorizontalAlignment="Stretch" Fill="Black" Height="1" Margin="0,10,0,0"/>
-        </StackPanel>
+                <Rectangle Name="DemoLine" HorizontalAlignment="Stretch" Fill="Black" Height="1" Margin="0,10,0,0"/>
+            </StackPanel>
+        </Expander>
     </Grid>
 </local:ApplierFormUserControl>

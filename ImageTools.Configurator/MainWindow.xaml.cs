@@ -76,6 +76,7 @@ namespace ImageTools.Configurator
                 }
             }
 
+            CreateCopyPanel.Visibility = Visibility.Visible;
             ShowUpdatedPreviewImage();
         }
 
@@ -183,6 +184,54 @@ namespace ImageTools.Configurator
             ShowUpdatedPreviewImage();
         }
 
+        private void CreateProcessButton_Click(object sender, RoutedEventArgs e)
+        {
+            var id = NewProcessTextBox.Text;
+
+            if (!_processRepo.IsSafeId(id))
+            {
+                MessageBox.Show("A process with this ID already exists");
+                return;
+            }
+
+            var newFile = new ProcessConfigurationFile
+            {
+                Id = id,
+                Filename = _processRepo.GetSafeFilename(id),
+                Steps = new List<ProcessStepConfiguration>()
+            };
+
+            if (CreateCopyCheckBox.IsChecked == true)
+            {
+                var selected = SelectedProcessFile;
+
+                newFile.Steps = selected.Steps;
+                newFile.MatchProperty = selected.MatchProperty;
+                newFile.MatchValue = selected.MatchValue;
+            }
+
+            _processRepo.CreateProcessConfigurationFile(newFile);
+
+            Processes = _processRepo.Configs;
+            ConfigsListBox.ItemsSource = Processes;
+            ConfigsListBox.Items.Refresh();
+            ConfigsListBox.SelectedItem = newFile;
+
+            NewProcessTextBox.Text = string.Empty;
+        }
+
+        private void CreateCopyCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (CreateCopyCheckBox.IsChecked == true)
+            {
+                CreateProcessButton.Content = "Create Copy";
+            }
+            else
+            {
+                CreateProcessButton.Content = "Create";
+            }
+        }
+
         #region Window Functionality 
 
         /// <summary>
@@ -242,5 +291,7 @@ namespace ImageTools.Configurator
         }
 
         #endregion
+
+        
     }
 }

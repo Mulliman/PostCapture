@@ -123,6 +123,16 @@ namespace ImageTools.Configurator
             }
         }
 
+        private void OperationsListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            var selectedItem = (KeyValuePair<string, IApplierFormBuilder>) OperationsListBox.SelectedItem;
+
+            var newForm = selectedItem.Value.Build(null);
+
+            ProcessOperationsPanel.Children.Add(newForm);
+            newForm.OnUpdate += new EventHandler(ShowUpdatedPreviewImageFromEvent);
+        }
+
         private ProcessConfigurationFile GetProcessFileFromCurrentUiState()
         {
             var processFile = SelectedProcessFile;

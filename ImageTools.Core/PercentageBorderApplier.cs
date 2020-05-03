@@ -74,6 +74,11 @@ namespace ImageTools.Core
 
         public static PercentageBorderApplierParams CreateArgsFromDictionary(Dictionary<string, string> parameters)
         {
+            if(parameters == null)
+            {
+                return new PercentageBorderApplierParams();
+            }
+
             return new PercentageBorderApplierParams()
             {
                 BorderWidthPercentage = double.Parse(parameters["BorderWidthPercentage"]),

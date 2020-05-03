@@ -40,12 +40,17 @@ namespace ImageTools.Configurator.ApplierForms
 
             DataContext = this;
 
-            WatermarkImage = applier.WatermarkImage.Path;
-            PercentageMargin = applier.WatermarkLocation.ImageMarginPercentage;
-            PercentageSize = applier.WatermarkLocation.ImageSizePercentage;
-            Location = applier.WatermarkLocation.Location;
+            WatermarkImage = applier?.WatermarkImage?.Path;
 
             LocationComboBox.ItemsSource = Enum.GetValues(typeof(Location)).Cast<Location>();
+
+            if (applier.WatermarkLocation != null)
+            {
+                PercentageMargin = applier.WatermarkLocation.ImageMarginPercentage;
+                PercentageSize = applier.WatermarkLocation.ImageSizePercentage;
+                Location = applier.WatermarkLocation.Location;
+            }
+                
             LocationComboBox.SelectedItem = Location;
 
             SetUpImage();
@@ -68,6 +73,11 @@ namespace ImageTools.Configurator.ApplierForms
 
         private void SetUpImage()
         {
+            if (string.IsNullOrWhiteSpace(WatermarkImage))
+            {
+                return;
+            }
+
             var image = new ImageFile(WatermarkImage);
 
             Uri fileUri = new Uri(image.Path);

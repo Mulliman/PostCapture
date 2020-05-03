@@ -77,6 +77,11 @@ namespace ImageTools.Core
 
         public static WatermarkApplierParams CreateArgsFromDictionary(Dictionary<string, string> parameters)
         {
+            if(parameters == null)
+            {
+                return new WatermarkApplierParams();
+            }
+
             var watermarkPath = parameters["WatermarkImage"];
 
             return new WatermarkApplierParams()

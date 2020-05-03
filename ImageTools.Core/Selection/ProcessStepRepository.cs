@@ -48,6 +48,19 @@ namespace ImageTools.Core.Selection
             return Configs.All(c => c.Id.ToLower() != name.ToLower());
         }
 
+        public void DeleteProcessConfigurationFile(ProcessConfigurationFile file)
+        {
+            if (!File.Exists(file.Filename))
+            {
+                throw new Exception($"File {file.Filename} does not exist.");
+            }
+
+            File.Delete(file.Filename);
+
+            var index = Configs.FindIndex(c => c.Id.Equals(file.Id, StringComparison.OrdinalIgnoreCase));
+            Configs.RemoveAt(index);
+        }
+
         public void SaveProcessConfigurationFile(ProcessConfigurationFile file)
         {
             var text = JsonConvert.SerializeObject(file, Formatting.Indented);

@@ -4,12 +4,14 @@ using ImageTools.Core.Builder;
 using ImageTools.Core.Selection;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,13 +24,15 @@ namespace ImageTools.Configurator
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private readonly ProcessStepRepository _processRepo;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            DisableEditing();
 
             //var folder = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName), "processes");
             var folder = @"C:\Development\Photography\ImageTools\ImageTools\PostProcess\bin\Debug\netcoreapp3.1\processes";
@@ -53,17 +57,78 @@ namespace ImageTools.Configurator
 
         public Dictionary<string, IApplierFormBuilder>  Forms { get; set; }
 
-        public ProcessConfigurationFile SelectedProcessFile { get; set; }
+        private ProcessConfigurationFile _selectedProcessFile;
+
+        public ProcessConfigurationFile SelectedProcessFile
+        {
+            get { return _selectedProcessFile; }
+            set
+            {
+                if (_selectedProcessFile != value)
+                {
+                    _selectedProcessFile = value;
+                    OnPropertyChanged("SelectedProcessFile");
+                }
+            }
+        }
+
+        public bool IsGridEnabled
+        {
+            get
+            {
+                return this.SelectedProcessFile != null;
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void EnableEditing()
+        {
+            Column1.IsEnabled = true;
+            Column1.Opacity = 1;
+
+            Column2.IsEnabled = true;
+            Column2.Opacity = 1;
+            
+        }
+        public void DisableEditing()
+        {
+            Column1.IsEnabled = false;
+            Column1.Opacity = 0.3;
+
+            Column2.IsEnabled = false;
+            Column2.Opacity = 0.3;
+        }
+
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
 
         private void ConfigsListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             SelectedProcessFile = ConfigsListBox.SelectedItem as ProcessConfigurationFile;
 
+            ProcessOperationsPanel.Children.Clear();
+
+            if (SelectedProcessFile == null)
+            {
+                ProcessNameTextBox.Text = null;
+                MatchPropertyTextBox.Text = null;
+                MatchValueTextBox.Text = null;
+
+                CreateCopyPanel.Visibility = Visibility.Collapsed;
+
+                ShowUpdatedPreviewImage();
+
+                DisableEditing();
+
+                return;
+            }
+
             ProcessNameTextBox.Text = SelectedProcessFile.Id;
             MatchPropertyTextBox.Text = SelectedProcessFile.MatchProperty;
             MatchValueTextBox.Text = SelectedProcessFile.MatchValue;
-
-            ProcessOperationsPanel.Children.Clear();
 
             foreach (var step in SelectedProcessFile.Steps)
             {
@@ -78,6 +143,8 @@ namespace ImageTools.Configurator
 
             CreateCopyPanel.Visibility = Visibility.Visible;
             ShowUpdatedPreviewImage();
+
+            EnableEditing();
         }
 
         private void ShowUpdatedPreviewImageFromEvent(object sender, EventArgs args)
@@ -88,6 +155,12 @@ namespace ImageTools.Configurator
 
         private void ShowUpdatedPreviewImage()
         {
+            if(SelectedProcessFile?.Steps == null)
+            {
+                PreviewImage.Source = null;
+                return;
+            }
+
             var testImageMemoryStream = new MemoryStream();
             Properties.Resources.TestImage.Save(testImageMemoryStream, ImageFormat.Jpeg);
             testImageMemoryStream.Seek(0, SeekOrigin.Begin);
@@ -123,6 +196,18 @@ namespace ImageTools.Configurator
                 _processRepo.SaveProcessConfigurationFile(processFile);
 
                 SelectedProcessFile = processFile;
+            }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show($"Do you want to delete the selected file {SelectedProcessFile.Id}?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                _processRepo.DeleteProcessConfigurationFile(SelectedProcessFile);
+
+                SelectedProcessFile = null;
+                RefreshConfigsList(null);
+                DisableEditing();
             }
         }
 
@@ -188,6 +273,12 @@ namespace ImageTools.Configurator
         {
             var id = NewProcessTextBox.Text;
 
+            if (string.IsNullOrEmpty(id))
+            {
+                MessageBox.Show("You must enter a ID for the new process.");
+                return;
+            }
+
             if (!_processRepo.IsSafeId(id))
             {
                 MessageBox.Show("A process with this ID already exists");
@@ -211,13 +302,18 @@ namespace ImageTools.Configurator
             }
 
             _processRepo.CreateProcessConfigurationFile(newFile);
+            RefreshConfigsList(newFile);
 
+            NewProcessTextBox.Text = string.Empty;
+            EnableEditing();
+        }
+
+        private void RefreshConfigsList(ProcessConfigurationFile selectedFile)
+        {
             Processes = _processRepo.Configs;
             ConfigsListBox.ItemsSource = Processes;
             ConfigsListBox.Items.Refresh();
-            ConfigsListBox.SelectedItem = newFile;
-
-            NewProcessTextBox.Text = string.Empty;
+            ConfigsListBox.SelectedItem = selectedFile;
         }
 
         private void CreateCopyCheckBox_Checked(object sender, RoutedEventArgs e)
@@ -291,7 +387,5 @@ namespace ImageTools.Configurator
         }
 
         #endregion
-
-        
     }
 }

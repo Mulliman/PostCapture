@@ -9,6 +9,7 @@
         <Expander IsExpanded="True">
             <Expander.Header>
                 <Grid Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Expander}}, Path=ActualWidth}">
+                    <!--<Grid>-->
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -17,17 +18,42 @@
                     <Label Grid.Column="0" HorizontalAlignment="Stretch">
                         <TextBlock Foreground="{StaticResource CaptureDoneOrangeBrush}">Percentage Border</TextBlock>
                     </Label>
-                    <Button Style="{StaticResource Small}" 
-                            Grid.Column="1" 
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="0, 0, 30, 0" HorizontalAlignment="Right">
+                        <Button Style="{StaticResource Small}"
+                            Width="30"
+                            Margin="3" 
+                            Padding="1" 
+                            FontSize="10" 
+                            VerticalContentAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Click="MoveUp_Click">
+                            ▲
+                        </Button>
+                        <Button Style="{StaticResource Small}"
+                            Width="30"
+                            Margin="3" 
+                            Padding="1" 
+                            FontSize="10" 
+                            VerticalContentAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Click="MoveDown_Click">
+                            ▼
+                        </Button>
+                        
+                        <Button Style="{StaticResource Small}" 
                             Width="50"
-                            Margin="3, 3, 30, 3" 
+                            Margin="3" 
                             Padding="1" 
                             FontSize="10" 
                             VerticalContentAlignment="Center"
                             HorizontalAlignment="Right"
                             Click="DeleteButton_Click">
-                        Remove
-                    </Button>
+                            Remove
+                        </Button>
+                        
+                    </StackPanel>
+                    
                 </Grid>
             </Expander.Header>
 

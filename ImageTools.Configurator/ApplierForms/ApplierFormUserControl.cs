@@ -10,6 +10,8 @@ namespace ImageTools.Configurator.ApplierForms
     {
         public event EventHandler OnUpdate;
         public event EventHandler OnDelete;
+        public event EventHandler OnMove;
+
         protected DebounceDispatcher _resizeThrottle = new DebounceDispatcher();
 
         public abstract ProcessStepConfiguration GetData();
@@ -36,10 +38,47 @@ namespace ImageTools.Configurator.ApplierForms
                 OnDelete(sender, new FormDeletedEventArgs { ApplierFormInstanceId = this.ApplierFormInstanceId });
             }
         }
+
+        protected void SendMoveUpEvent(object sender, EventArgs args)
+        {
+            if (OnMove != null)
+            {
+                OnMove(sender, new FormMovedEventArgs 
+                { 
+                    ApplierFormInstanceId = this.ApplierFormInstanceId,
+                    Direction = MoveDirection.Up
+                });
+            }
+        }
+
+        protected void SendMoveDownEvent(object sender, EventArgs args)
+        {
+            if (OnMove != null)
+            {
+                OnMove(sender, new FormMovedEventArgs 
+                { 
+                    ApplierFormInstanceId = this.ApplierFormInstanceId,
+                    Direction = MoveDirection.Down
+                });
+            }
+        }
     }
 
     public class FormDeletedEventArgs : EventArgs
     {
         public Guid ApplierFormInstanceId { get; set; }
+    }
+
+    public class FormMovedEventArgs : EventArgs
+    {
+        public Guid ApplierFormInstanceId { get; set; }
+
+        public MoveDirection Direction { get; set; }
+    }
+
+    public enum MoveDirection
+    {
+        Up,
+        Down
     }
 }

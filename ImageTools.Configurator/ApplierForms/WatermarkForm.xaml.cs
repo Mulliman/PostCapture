@@ -127,6 +127,16 @@ namespace ImageTools.Configurator.ApplierForms
         {
             SendDeletedEvent(sender, e);
         }
+
+        private void MoveUp_Click(object sender, RoutedEventArgs e)
+        {
+            SendMoveUpEvent(sender, e);
+        }
+
+        private void MoveDown_Click(object sender, RoutedEventArgs e)
+        {
+            SendMoveDownEvent(sender, e);
+        }
     }
 
     public class WatermarkFormBuilder : IApplierFormBuilder

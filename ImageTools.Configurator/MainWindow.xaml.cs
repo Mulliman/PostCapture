@@ -136,8 +136,8 @@ namespace ImageTools.Configurator
                 {
                     var control = Forms[step.Id].Build(step.Parameters);
                     ProcessOperationsPanel.Children.Add(control);
-                    control.OnUpdate += new EventHandler(ShowUpdatedPreviewImageFromEvent);
-                    control.OnDelete += new EventHandler(OnOperationDeleted);
+
+                    RegisterSubFormsEvents(control);
                 }
             }
 
@@ -213,20 +213,26 @@ namespace ImageTools.Configurator
 
         private void OperationsListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if(OperationsListBox.SelectedItem == null)
+            if (OperationsListBox.SelectedItem == null)
             {
                 return;
             }
 
-            var selectedItem = (KeyValuePair<string, IApplierFormBuilder>) OperationsListBox.SelectedItem;
+            var selectedItem = (KeyValuePair<string, IApplierFormBuilder>)OperationsListBox.SelectedItem;
 
             var newForm = selectedItem.Value.Build(null);
 
             ProcessOperationsPanel.Children.Add(newForm);
-            newForm.OnUpdate += new EventHandler(ShowUpdatedPreviewImageFromEvent);
-            newForm.OnDelete += new EventHandler(OnOperationDeleted);
+            RegisterSubFormsEvents(newForm);
 
             OperationsListBox.UnselectAll();
+        }
+
+        private void RegisterSubFormsEvents(ApplierFormUserControl formUserControl)
+        {
+            formUserControl.OnUpdate += new EventHandler(ShowUpdatedPreviewImageFromEvent);
+            formUserControl.OnDelete += new EventHandler(OnOperationDeleted);
+            formUserControl.OnMove += new EventHandler(OnOperationMoved);
         }
 
         private ProcessConfigurationFile GetProcessFileFromCurrentUiState()
@@ -261,6 +267,44 @@ namespace ImageTools.Configurator
                 if(child.ApplierFormInstanceId == id)
                 {
                     ProcessOperationsPanel.Children.Remove(child);
+                    break;
+                }
+            }
+
+            SelectedProcessFile = GetProcessFileFromCurrentUiState();
+            ShowUpdatedPreviewImage();
+        }
+
+        private void OnOperationMoved(object sender, EventArgs args)
+        {
+            var typedArgs = args as FormMovedEventArgs;
+            var id = typedArgs.ApplierFormInstanceId;
+
+            foreach (var item in ProcessOperationsPanel.Children)
+            {
+                var child = item as ApplierFormUserControl;
+                if (child.ApplierFormInstanceId == id)
+                {
+                    var oldIndex = ProcessOperationsPanel.Children.IndexOf(child);
+
+                    if(oldIndex == 0 && typedArgs.Direction == MoveDirection.Up)
+                    {
+                        return;
+                    }
+
+                    if (oldIndex == ProcessOperationsPanel.Children.Count -1 && typedArgs.Direction == MoveDirection.Down)
+                    {
+                        return;
+                    }
+
+                    var newIndex = typedArgs.Direction == MoveDirection.Up
+                        ? oldIndex - 1
+                        : oldIndex + 1;
+
+                    var toMove = ProcessOperationsPanel.Children[oldIndex];
+                    ProcessOperationsPanel.Children.Remove(toMove);
+                    ProcessOperationsPanel.Children.Insert(newIndex, toMove);
+
                     break;
                 }
             }

@@ -26,6 +26,8 @@ namespace ImageTools.Core.Builder
 
         private static WatermarkApplierParams CreateWatermarkApplierParams(ProcessStepConfiguration config)
         {
+            var image = config.Parameters["WatermarkImage"];
+
             return new WatermarkApplierParams()
             {
                 Location = new WatermarkLocation
@@ -34,7 +36,7 @@ namespace ImageTools.Core.Builder
                     ImageSizePercentage = double.Parse(config.Parameters["ImageSizePercentage"]),
                     Location = Enum.Parse<Location>(config.Parameters["Location"])
                 },
-                WatermarkImage = new ImageFile(config.Parameters["WatermarkImage"])
+                WatermarkImage = image !=null ? new ImageFile(image) : null
             };
         }
 

@@ -8,9 +8,27 @@
     <Grid>
         <Expander IsExpanded="True">
             <Expander.Header>
-                <Label HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <TextBlock Foreground="{StaticResource CaptureDoneOrangeBrush}">Percentage Border</TextBlock>
-                </Label>
+                <Grid Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Expander}}, Path=ActualWidth}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" HorizontalAlignment="Stretch">
+                        <TextBlock Foreground="{StaticResource CaptureDoneOrangeBrush}">Percentage Border</TextBlock>
+                    </Label>
+                    <Button Style="{StaticResource Small}" 
+                            Grid.Column="1" 
+                            Width="50"
+                            Margin="3, 3, 30, 3" 
+                            Padding="1" 
+                            FontSize="10" 
+                            VerticalContentAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Click="DeleteButton_Click">
+                        Remove
+                    </Button>
+                </Grid>
             </Expander.Header>
 
             <StackPanel>

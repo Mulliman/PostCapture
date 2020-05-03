@@ -19,7 +19,7 @@
                     Click="MinimizeButton_Click"
                     DockPanel.Dock="Right" Margin="5" Padding="5" BorderThickness="0" />
 
-            <TextBlock HorizontalAlignment="Stretch" TextAlignment="Center" VerticalAlignment="Center" Padding="5,0">Image Tools</TextBlock>
+            <TextBlock HorizontalAlignment="Stretch" TextAlignment="Center" VerticalAlignment="Center" Padding="5,0">Capture Done</TextBlock>
         </DockPanel>
 
         <Grid>

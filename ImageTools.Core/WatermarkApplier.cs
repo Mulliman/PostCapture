@@ -43,6 +43,16 @@ namespace ImageTools.Core
 
         public EditableImage Apply(EditableImage image)
         {
+            if(image == null)
+            {
+                return null;
+            }
+
+            if(WatermarkImage == null || WatermarkLocation == null)
+            {
+                return image;
+            }
+
             var bmp = image.Image;
 
             var shortestSide = bmp.Height > bmp.Width ? bmp.Width : bmp.Height;

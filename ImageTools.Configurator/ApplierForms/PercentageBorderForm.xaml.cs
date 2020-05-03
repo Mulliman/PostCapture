@@ -77,6 +77,11 @@ namespace ImageTools.Configurator.ApplierForms
                 }
             };
         }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            SendDeletedEvent(sender, e);
+        }
     }
 
     public class PercentageBorderFormBuilder : IApplierFormBuilder

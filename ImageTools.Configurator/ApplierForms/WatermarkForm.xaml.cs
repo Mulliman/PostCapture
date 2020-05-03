@@ -122,6 +122,11 @@ namespace ImageTools.Configurator.ApplierForms
         {
             SendOnUpdateEvent(sender, e);
         }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            SendDeletedEvent(sender, e);
+        }
     }
 
     public class WatermarkFormBuilder : IApplierFormBuilder

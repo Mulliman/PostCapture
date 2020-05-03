@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -71,6 +72,7 @@ namespace ImageTools.Configurator
                     var control = Forms[step.Id].Build(step.Parameters);
                     ProcessOperationsPanel.Children.Add(control);
                     control.OnUpdate += new EventHandler(ShowUpdatedPreviewImageFromEvent);
+                    control.OnDelete += new EventHandler(OnOperationDeleted);
                 }
             }
 
@@ -125,12 +127,20 @@ namespace ImageTools.Configurator
 
         private void OperationsListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            if(OperationsListBox.SelectedItem == null)
+            {
+                return;
+            }
+
             var selectedItem = (KeyValuePair<string, IApplierFormBuilder>) OperationsListBox.SelectedItem;
 
             var newForm = selectedItem.Value.Build(null);
 
             ProcessOperationsPanel.Children.Add(newForm);
             newForm.OnUpdate += new EventHandler(ShowUpdatedPreviewImageFromEvent);
+            newForm.OnDelete += new EventHandler(OnOperationDeleted);
+
+            OperationsListBox.UnselectAll();
         }
 
         private ProcessConfigurationFile GetProcessFileFromCurrentUiState()
@@ -152,6 +162,25 @@ namespace ImageTools.Configurator
             processFile.Id = SelectedProcessFile.Id;
 
             return processFile;
+        }
+
+        private void OnOperationDeleted(object sender, EventArgs args)
+        {
+            var typedArgs = args as FormDeletedEventArgs;
+            var id = typedArgs.ApplierFormInstanceId;
+
+            foreach(var item in ProcessOperationsPanel.Children)
+            {
+                var child = item as ApplierFormUserControl;
+                if(child.ApplierFormInstanceId == id)
+                {
+                    ProcessOperationsPanel.Children.Remove(child);
+                    break;
+                }
+            }
+
+            SelectedProcessFile = GetProcessFileFromCurrentUiState();
+            ShowUpdatedPreviewImage();
         }
 
         #region Window Functionality 

@@ -86,14 +86,19 @@ namespace ImageTools.Configurator.ApplierForms
             switch (Location)
             {
                 case Location.BottomLeft:
+                case Location.Left:
+                case Location.TopLeft:
                     ExampleImage.HorizontalAlignment = HorizontalAlignment.Left;
                     break;
 
                 case Location.BottomRight:
+                case Location.Right:
+                case Location.TopRight:
                     ExampleImage.HorizontalAlignment = HorizontalAlignment.Right;
                     break;
 
                 case Location.Bottom:
+                case Location.Top:
                 default:
                     ExampleImage.HorizontalAlignment = HorizontalAlignment.Center;
                     break;

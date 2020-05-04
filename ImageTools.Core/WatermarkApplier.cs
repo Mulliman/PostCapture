@@ -72,14 +72,43 @@ namespace ImageTools.Core
             var x = margin;
             var y = margin;
 
-            if(location == Location.BottomLeft)
+            switch (location)
             {
-                y = mainImage.Image.Height - watermark.Image.Height - margin;
-            } 
-            else if(location == Location.BottomRight)
-            {
-                y = mainImage.Image.Height - watermark.Image.Height - margin;
-                x = mainImage.Image.Width - watermark.Image.Width - margin;
+                case Location.BottomLeft:
+                    y = mainImage.Image.Height - watermark.Image.Height - margin;
+                    break;
+
+                case Location.BottomRight:
+                    y = mainImage.Image.Height - watermark.Image.Height - margin;
+                    x = mainImage.Image.Width - watermark.Image.Width - margin;
+                    break;
+
+                case Location.Bottom:
+                    y = mainImage.Image.Height - watermark.Image.Height - margin;
+                    x = (mainImage.Image.Width / 2) - (watermark.Image.Width / 2);
+                    break;
+
+                case Location.Left:
+                    y = (mainImage.Image.Height / 2) - (watermark.Image.Height / 2);
+                    break;
+
+                case Location.Right:
+                    x = mainImage.Image.Width - watermark.Image.Width - margin;
+                    y = (mainImage.Image.Height / 2) - (watermark.Image.Height / 2);
+                    break;
+
+                case Location.TopRight:
+                    x = mainImage.Image.Width - watermark.Image.Width - margin;
+                    break;
+
+                case Location.Top:
+                    x = (mainImage.Image.Width / 2) - (watermark.Image.Width / 2);
+                    break;
+
+                case Location.TopLeft:
+                default:
+                    // This is the default location
+                    break;
             }
 
             return new Point(x, y);

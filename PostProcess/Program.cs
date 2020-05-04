@@ -22,7 +22,7 @@ namespace PostProcess
 
             var steps = selector.GetProcessSteps(editableImage);
 
-            foreach(var step in steps.Steps)
+            foreach (var step in steps.Steps)
             {
                 editableImage = step.Apply(editableImage);
             }

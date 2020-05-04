@@ -34,8 +34,8 @@ namespace ImageTools.Configurator
 
             DisableEditing();
 
-            //var folder = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName), "processes");
-            var folder = @"C:\Development\Photography\ImageTools\ImageTools\PostProcess\bin\Debug\netcoreapp3.1\processes";
+            var folder = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName), "processes");
+            //var folder = @"C:\Development\Photography\ImageTools\ImageTools\PostProcess\bin\Debug\netcoreapp3.1\processes";
             _processRepo = new ProcessStepRepository(folder);
 
             Processes = _processRepo.Configs;
@@ -248,10 +248,9 @@ namespace ImageTools.Configurator
             }
 
             processFile.Steps = steps;
-            processFile.Id = SelectedProcessFile.Id;
-            processFile.MatchProperty = SelectedProcessFile.MatchProperty;
-            processFile.MatchValue = SelectedProcessFile.MatchValue;
-            processFile.Id = SelectedProcessFile.Id;
+            processFile.Id = ProcessNameTextBox.Text;
+            processFile.MatchProperty = MatchPropertyTextBox.Text;
+            processFile.MatchValue = MatchValueTextBox.Text;
 
             return processFile;
         }

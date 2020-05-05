@@ -14,6 +14,9 @@ namespace PostProcess
 
         static void Main(string[] args)
         {
+            Console.WriteLine("Start");
+            Console.ReadLine();
+
             ImagePath = args[0];
 
             var editableImage = EditableImage.FromFilePath(ImagePath);
@@ -28,6 +31,9 @@ namespace PostProcess
             }
 
             editableImage.Save();
+
+            Console.WriteLine("End");
+            Console.ReadLine();
         }
     }
 }

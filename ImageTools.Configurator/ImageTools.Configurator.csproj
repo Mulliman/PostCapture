@@ -7,7 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Processes\ProcessesWillSaveHere.txt" />
     <None Remove="Resources\TestImage.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Processes\ProcessesWillSaveHere.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

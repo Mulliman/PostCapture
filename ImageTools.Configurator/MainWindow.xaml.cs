@@ -13,6 +13,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -35,12 +36,9 @@ namespace ImageTools.Configurator
             DisableEditing();
 
             var folder = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName), "processes");
-            //var folder = @"C:\Development\Photography\ImageTools\ImageTools\PostProcess\bin\Debug\netcoreapp3.1\processes";
             _processRepo = new ProcessStepRepository(folder);
 
-            Processes = _processRepo.Configs;
-
-            ConfigsListBox.ItemsSource = Processes;
+            RefreshProcessListBox();
 
             Forms = new Dictionary<string, IApplierFormBuilder>
             {
@@ -116,6 +114,7 @@ namespace ImageTools.Configurator
                 ProcessNameTextBox.Text = null;
                 MatchPropertyTextBox.Text = null;
                 MatchValueTextBox.Text = null;
+                PriorityTextBox.Text = null;
 
                 CreateCopyPanel.Visibility = Visibility.Collapsed;
 
@@ -129,6 +128,7 @@ namespace ImageTools.Configurator
             ProcessNameTextBox.Text = SelectedProcessFile.Id;
             MatchPropertyTextBox.Text = SelectedProcessFile.MatchProperty;
             MatchValueTextBox.Text = SelectedProcessFile.MatchValue;
+            PriorityTextBox.Text = SelectedProcessFile.Priority.ToString();
 
             foreach (var step in SelectedProcessFile.Steps)
             {
@@ -187,6 +187,19 @@ namespace ImageTools.Configurator
             PreviewImage.Source = imageSource;
         }
 
+        private void RefreshProcessListBox(ProcessConfigurationFile selectedProcessFile = null)
+        {
+            Processes = _processRepo.Configs?.OrderBy(c => c.Priority)?.ToList();
+            ConfigsListBox.ItemsSource = Processes;
+            ConfigsListBox.Items.Refresh();
+
+            if (selectedProcessFile == null)
+            {
+                SelectedProcessFile = selectedProcessFile;
+                ConfigsListBox.SelectedItem = SelectedProcessFile;
+            }    
+        }
+
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Do you want to overwrite the existing file?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
@@ -195,7 +208,7 @@ namespace ImageTools.Configurator
 
                 _processRepo.SaveProcessConfigurationFile(processFile);
 
-                SelectedProcessFile = processFile;
+                RefreshProcessListBox(processFile);
             }
         }
 
@@ -206,7 +219,7 @@ namespace ImageTools.Configurator
                 _processRepo.DeleteProcessConfigurationFile(SelectedProcessFile);
 
                 SelectedProcessFile = null;
-                RefreshConfigsList(null);
+                RefreshProcessListBox(null);
                 DisableEditing();
             }
         }
@@ -251,6 +264,10 @@ namespace ImageTools.Configurator
             processFile.Id = ProcessNameTextBox.Text;
             processFile.MatchProperty = MatchPropertyTextBox.Text;
             processFile.MatchValue = MatchValueTextBox.Text;
+
+            var priority = processFile.Priority;
+            int.TryParse(PriorityTextBox.Text ?? "0", out priority);
+            processFile.Priority = priority;
 
             return processFile;
         }
@@ -345,18 +362,10 @@ namespace ImageTools.Configurator
             }
 
             _processRepo.CreateProcessConfigurationFile(newFile);
-            RefreshConfigsList(newFile);
+            RefreshProcessListBox(newFile);
 
             NewProcessTextBox.Text = string.Empty;
             EnableEditing();
-        }
-
-        private void RefreshConfigsList(ProcessConfigurationFile selectedFile)
-        {
-            Processes = _processRepo.Configs;
-            ConfigsListBox.ItemsSource = Processes;
-            ConfigsListBox.Items.Refresh();
-            ConfigsListBox.SelectedItem = selectedFile;
         }
 
         private void CreateCopyCheckBox_Checked(object sender, RoutedEventArgs e)
@@ -368,6 +377,32 @@ namespace ImageTools.Configurator
             else
             {
                 CreateProcessButton.Content = "Create";
+            }
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void NumberValidationTextBoxPasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String text = (String)e.DataObject.GetData(typeof(String));
+
+                Regex regex = new Regex("[^0-9]+");
+                var isValid = regex.IsMatch(text);
+
+                if (isValid)
+                {
+                    e.CancelCommand();
+                }
+            }
+            else
+            {
+                e.CancelCommand();
             }
         }
 

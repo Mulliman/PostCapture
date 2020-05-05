@@ -89,6 +89,8 @@ namespace ImageTools.Core.Selection
     public class ProcessConfigurationFile : ProcessConfiguration
     {
         public string Filename { get; set; }
+
+        public string NameAndPriority => $"({Priority}) {Id}";
     }
 
     public class ProcessConfiguration
@@ -98,6 +100,8 @@ namespace ImageTools.Core.Selection
         public string MatchProperty { get; set; }
 
         public string MatchValue { get; set; }
+
+        public int Priority { get; set; }
 
         public List<ProcessStepConfiguration> Steps { get; set; }
     }

@@ -20,7 +20,7 @@ namespace ImageTools.Core.Selection
         public ExifBasedSelector()
         {
             var repo = new ProcessStepRepository(Folder);
-            _configs = repo.Configs;
+            _configs = repo.Configs.OrderBy(c => c.Priority).ToList();
         }
 
         public ProcessSteps GetProcessSteps(ImageFile imageFile)
@@ -73,24 +73,25 @@ namespace ImageTools.Core.Selection
                     {
                         Console.WriteLine("{0}({1}, {2}): {3}", value.Tag, Enum.GetName(typeof(IptcTag), value.Tag), value.Value, value.ToString());
                     }
-                }
-                else
-                {
-                    var lowerMatchKey = matchCategory.ToLower();
 
-                    var metadata = ImageMetadataReader.ReadMetadata(imageFile.Path);
-                    var xmpDirectory = metadata.OfType<XmpDirectory>().FirstOrDefault();
-                    var xmpDictionary = xmpDirectory.GetXmpProperties().ToDictionary(x => x.Key.ToLower(), x => x.Value);
-
-                    if (imageCategoryValue == null && xmpDictionary.ContainsKey(lowerMatchKey))
+                    if(imageCategoryValue == null)
                     {
-                        // try to get from XMP profile instead.
-                        imageCategoryValue = xmpDictionary[lowerMatchKey];
-                    }
+                        var lowerMatchKey = matchCategory.ToLower();
 
-                    foreach (var value in profile2.Values)
-                    {
-                        Console.WriteLine("{0}({1}, {2}): {3}", value.Tag, Enum.GetName(typeof(IptcTag), value.Tag), value.Value, value.ToString());
+                        var metadata = ImageMetadataReader.ReadMetadata(imageFile.Path);
+                        var xmpDirectory = metadata.OfType<XmpDirectory>().FirstOrDefault();
+                        var xmpDictionary = xmpDirectory.GetXmpProperties().ToDictionary(x => x.Key.ToLower(), x => x.Value);
+
+                        if (imageCategoryValue == null && xmpDictionary.ContainsKey(lowerMatchKey))
+                        {
+                            // try to get from XMP profile instead.
+                            imageCategoryValue = xmpDictionary[lowerMatchKey];
+                        }
+
+                        foreach (var value in profile2.Values)
+                        {
+                            Console.WriteLine("{0}({1}, {2}): {3}", value.Tag, Enum.GetName(typeof(IptcTag), value.Tag), value.Value, value.ToString());
+                        }
                     }
                 }
 

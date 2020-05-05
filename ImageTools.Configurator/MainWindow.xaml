@@ -71,12 +71,18 @@
                                 </Label>
                             </Expander.Header>
 
-                            <ListBox Name="ConfigsListBox"  Grid.Column="0" Margin="0,10,0,10" BorderThickness="0" SelectionChanged="ConfigsListBox_SelectionChanged">
+                            <ListBox Name="ConfigsListBox"  Grid.Column="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="0,10,0,10" BorderThickness="0" SelectionChanged="ConfigsListBox_SelectionChanged">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid Margin="0,2">
-                                            <TextBlock Text="{Binding Id}" />
+                                        <Grid Margin="0,2" HorizontalAlignment="Stretch">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="50"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Text="{Binding Id}" />
+                                            <TextBlock Foreground="#666" Grid.Column="1" HorizontalAlignment="Right" Text="{Binding Priority}" />
                                         </Grid>
+
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>
@@ -158,6 +164,26 @@
                                 <!--<Button Content="Save As" Margin="0,0,0,10" Padding="5" Click="SaveButton_Click"/>-->
                                 <Button Content="Delete" Margin="0,0,0,0" Padding="5" Click="DeleteButton_Click"/>
                             </StackPanel>
+                        </Expander>
+                    </Border>
+
+                    <Border BorderThickness="0,0,0,1" BorderBrush="{StaticResource BackgroundColour}">
+                        <Expander IsExpanded="True" Margin="10">
+                            <Expander.Header>
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top">
+                                    <TextBlock Foreground="{StaticResource CaptureDoneOrangeBrush}">Process Priority</TextBlock>
+                                </Label>
+                            </Expander.Header>
+
+                            <DockPanel Margin="5">
+                                <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Margin="0,0,0,10">
+                                    Processes are ordered in ascending numerical order. The first process that matches the conditions will be what is applied to the image.
+                                </TextBlock>
+
+                                <Label Content="Priority" Width="50" VerticalAlignment="Center" />
+                                <!--Text="{Binding SelectedProcessFile.MatchProperty}"-->
+                                <TextBox Name="PriorityTextBox" PreviewTextInput="NumberValidationTextBox" DataObject.Pasting="NumberValidationTextBoxPasting" HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0"  />
+                            </DockPanel>
                         </Expander>
                     </Border>
 

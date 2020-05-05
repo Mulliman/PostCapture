@@ -71,29 +71,34 @@
                                 </Label>
                             </Expander.Header>
 
-                            <ListBox Name="ConfigsListBox"  Grid.Column="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="0,10,0,10" BorderThickness="0" SelectionChanged="ConfigsListBox_SelectionChanged">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid Margin="0,2" HorizontalAlignment="Stretch">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                                <ColumnDefinition Width="50"></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-                                            <TextBlock Grid.Column="0" Text="{Binding Id}" />
-                                            <TextBlock Foreground="#666" Grid.Column="1" HorizontalAlignment="Right" Text="{Binding Priority}" />
-                                        </Grid>
+                            <StackPanel>
+                                <Grid Margin="5,10,5,0" HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="50"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Foreground="#666" FontStyle="Italic" Grid.Column="0" Text="Id" />
+                                    <TextBlock Foreground="#666" FontStyle="Italic" Grid.Column="1" HorizontalAlignment="Right" Text="Priority" />
+                                </Grid>
 
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
+                                <ListBox Name="ConfigsListBox" Padding="0" Grid.Column="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="0,0,0,10" BorderThickness="0" SelectionChanged="ConfigsListBox_SelectionChanged">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="0,2" HorizontalAlignment="Stretch">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{Binding Id}" />
+                                                <TextBlock Foreground="#666" Grid.Column="1" HorizontalAlignment="Right" Text="{Binding Priority}" />
+                                            </Grid>
+
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
                         </Expander>
                     </Border>
-                    
-                    <!--<DockPanel Margin="0,0,0,10" Background="#666">
-                        <Label Content="Processes" Foreground="#000" VerticalAlignment="Center" FontWeight="Bold" Padding="10,0,5,0" DockPanel.Dock="Left" />
-                        <Button Content="+" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Padding="5" BorderThickness="0" Click="CreateProcessButton_Click"  DockPanel.Dock="Right" Width="20"/>
-                    </DockPanel>-->
-
                 </StackPanel>
 
                 <Grid Grid.Column="1" Grid.Row="0" Margin="10" Background="{StaticResource PanelBackgroundColour}" Name="Column1">

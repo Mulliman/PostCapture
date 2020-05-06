@@ -34,7 +34,7 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Column="0" Grid.Row="0" Margin="10">
-                    <Border BorderThickness="0,0,0,1" BorderBrush="{StaticResource BackgroundColour}">
+                    <Border BorderThickness="1" BorderBrush="#333">
                         <Expander IsExpanded="True" Margin="10">
                             <Expander.Header>
                                 <Label HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -47,22 +47,46 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="100" />
                                 </Grid.ColumnDefinitions>
-                                
+
                                 <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
                                     <RowDefinition />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
 
-                                <TextBox Grid.Column="0" Grid.Row="0" Name="NewProcessTextBox" Padding="10" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Stretch"></TextBox>
-                                <Button Grid.Column="1" Grid.Row="0" Name="CreateProcessButton" DockPanel.Dock="Right" Width="100" Click="CreateProcessButton_Click">Create</Button>
+                                <TextBox Grid.Column="0" Grid.Row="0" Name="NewProcessTextBox" Padding="10" Margin="0,10,5,0" VerticalAlignment="Center" HorizontalAlignment="Stretch"></TextBox>
+                                <Button Grid.Column="1" Grid.Row="0" Name="CreateProcessButton" Margin="0,10,0,0" DockPanel.Dock="Right" Width="100" Click="CreateProcessButton_Click">Create</Button>
 
-                                <DockPanel Name="CreateCopyPanel" Grid.Row="1" Visibility="Collapsed" Margin="0,5,0,0">
+                                <DockPanel Name="CreateCopyPanel" Grid.Row="1" Visibility="Collapsed" Margin="0,5,0,0" Grid.ColumnSpan="2">
                                     <Label DockPanel.Dock="Left">Copy settings from selected process</Label>
                                     <CheckBox Name="CreateCopyCheckBox" DockPanel.Dock="Left" Checked="CreateCopyCheckBox_Checked" Unchecked="CreateCopyCheckBox_Checked"></CheckBox>
+                                </DockPanel>
+
+                                <DockPanel Name="ChooseExampleImagePanel" Grid.Row="2" Margin="0,5,0,0" Grid.ColumnSpan="2">
+                                    <Label DockPanel.Dock="Left">Populate rule from example image</Label>
+                                    <CheckBox Name="ChooseExampleImageCheckBox" DockPanel.Dock="Left" Checked="ChooseExampleImageCheckBox_Checked" Unchecked="ChooseExampleImageCheckBox_Checked"></CheckBox>
+                                </DockPanel>
+
+                                <DockPanel Name="UploadExampleImagePanel" Grid.Row="3" Grid.ColumnSpan="2" Visibility="Collapsed" Margin="10,5,10,0" HorizontalAlignment="Stretch">
+                                    <StackPanel DockPanel.Dock="Top">
+                                        <Button x:Name="BrowseButton" Content="Select file" HorizontalAlignment="Left"  Margin="0, 5"  Width="100"  Click="ExampleImageBrowseButton_Click" />
+                                    </StackPanel>
+                                    <ComboBox DockPanel.Dock="Bottom" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Name="MatchCategoryAndValueComboBox">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <DockPanel>
+                                                    <TextBlock DockPanel.Dock="Left" Text="{Binding Key}" />
+                                                    <TextBlock Foreground="#666" Grid.Column="1" DockPanel.Dock="Right" HorizontalAlignment="Right" Text="{Binding Value}" />
+                                                </DockPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
                                 </DockPanel>
                             </Grid>
                         </Expander>
                     </Border>
+                    
                     <Border BorderThickness="0,0,0,1" BorderBrush="{StaticResource BackgroundColour}">
                         <Expander IsExpanded="True" Margin="10">
                             <Expander.Header>
@@ -130,12 +154,12 @@
                                     </DockPanel>
 
                                     <DockPanel Margin="5">
-                                        <Label Content="The value in this EXIF category" Width="250" />
+                                        <Label Content="The value in this category" Width="175" />
                                         <!--Text="{Binding SelectedProcessFile.MatchProperty}"-->
                                         <TextBox Name="MatchPropertyTextBox"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0" />
                                     </DockPanel>
                                     <DockPanel Margin="5">
-                                        <Label Content="Matches this value" Width="250"/>
+                                        <Label Content="Matches this value" Width="175"/>
                                         <!--Text="{Binding SelectedProcessFile.MatchValue}"-->
                                         <TextBox Name="MatchValueTextBox"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0" />
                                     </DockPanel>

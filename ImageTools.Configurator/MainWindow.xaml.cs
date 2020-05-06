@@ -193,9 +193,9 @@ namespace ImageTools.Configurator
             ConfigsListBox.ItemsSource = Processes;
             ConfigsListBox.Items.Refresh();
 
-            if (selectedProcessFile == null)
+            if (selectedProcessFile != null)
             {
-                SelectedProcessFile = selectedProcessFile;
+                SelectedProcessFile = Processes.FirstOrDefault(p => p.Id == selectedProcessFile.Id);
                 ConfigsListBox.SelectedItem = SelectedProcessFile;
             }    
         }
@@ -361,6 +361,14 @@ namespace ImageTools.Configurator
                 newFile.MatchValue = selected.MatchValue;
             }
 
+            if(ChooseExampleImageCheckBox.IsChecked == true && MatchCategoryAndValueComboBox.SelectedItem != null)
+            {
+                var selected = (KeyValuePair<string,string>)MatchCategoryAndValueComboBox.SelectedItem;
+
+                newFile.MatchProperty = selected.Key;
+                newFile.MatchValue = selected.Value;
+            }
+
             _processRepo.CreateProcessConfigurationFile(newFile);
             RefreshProcessListBox(newFile);
 
@@ -377,6 +385,46 @@ namespace ImageTools.Configurator
             else
             {
                 CreateProcessButton.Content = "Create";
+            }
+        }
+
+        private void ChooseExampleImageCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if(ChooseExampleImageCheckBox.IsChecked == true)
+            {
+                UploadExampleImagePanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                UploadExampleImagePanel.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void ExampleImageBrowseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "Jpegs|*.jpeg;*.jpg;"
+            };
+
+            var result = fileDialog.ShowDialog();
+
+            if (result == true)
+            {
+                try
+                {
+                    var file = fileDialog.FileName;
+                    var dict = MetadataSelector.GetCategoryValueDictionary(new ImageFile(file));
+
+                    MatchCategoryAndValueComboBox.ItemsSource = dict;
+
+                    MatchCategoryAndValueComboBox.Visibility = Visibility.Visible;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Failed to get metadata for file.");
+                    MatchCategoryAndValueComboBox.Visibility = Visibility.Collapsed;
+                }
             }
         }
 

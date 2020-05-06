@@ -21,7 +21,7 @@ namespace PostProcess
 
             var editableImage = EditableImage.FromFilePath(ImagePath);
 
-            var selector = new ExifBasedSelector();
+            var selector = new MetadataSelector();
 
             var steps = selector.GetProcessSteps(editableImage);
 

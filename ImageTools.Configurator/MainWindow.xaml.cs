@@ -51,6 +51,11 @@ namespace ImageTools.Configurator
             DataContext = this;
         }
 
+        public MainWindow(string exampleFile) : this()
+        {
+            ShowExampleImageOptions(exampleFile);
+        }
+
         public List<ProcessConfigurationFile> Processes { get; set; }
 
         public Dictionary<string, IApplierFormBuilder>  Forms { get; set; }
@@ -411,20 +416,28 @@ namespace ImageTools.Configurator
 
             if (result == true)
             {
-                try
-                {
-                    var file = fileDialog.FileName;
-                    var dict = MetadataSelector.GetCategoryValueDictionary(new ImageFile(file));
+                var file = fileDialog.FileName;
+                ShowExampleImageOptions(file);
+            }
+        }
 
-                    MatchCategoryAndValueComboBox.ItemsSource = dict;
+        private void ShowExampleImageOptions(string file)
+        {
+            try
+            {
+                var dict = MetadataSelector.GetCategoryValueDictionary(new ImageFile(file));
+                ExampleImageFileNameTextBox.Text = Path.GetFileName(file);
 
-                    MatchCategoryAndValueComboBox.Visibility = Visibility.Visible;
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Failed to get metadata for file.");
-                    MatchCategoryAndValueComboBox.Visibility = Visibility.Collapsed;
-                }
+                MatchCategoryAndValueComboBox.ItemsSource = dict;
+
+                ChooseExampleImageCheckBox.IsChecked = true;
+                UploadExampleImagePanel.Visibility = Visibility.Visible;
+                MatchCategoryAndValueComboBox.Visibility = Visibility.Visible;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Failed to get metadata for file.");
+                MatchCategoryAndValueComboBox.Visibility = Visibility.Collapsed;
             }
         }
 

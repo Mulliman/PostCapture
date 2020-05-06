@@ -69,10 +69,19 @@
                                 </DockPanel>
 
                                 <DockPanel Name="UploadExampleImagePanel" Grid.Row="3" Grid.ColumnSpan="2" Visibility="Collapsed" Margin="10,5,10,0" HorizontalAlignment="Stretch">
-                                    <StackPanel DockPanel.Dock="Top">
-                                        <Button x:Name="BrowseButton" Content="Select file" HorizontalAlignment="Left"  Margin="0, 5"  Width="100"  Click="ExampleImageBrowseButton_Click" />
-                                    </StackPanel>
-                                    <ComboBox DockPanel.Dock="Bottom" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Name="MatchCategoryAndValueComboBox">
+                                    <Grid DockPanel.Dock="Top" HorizontalAlignment="Stretch">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBox HorizontalAlignment="Stretch" Grid.Column="0" Margin="0, 5" Padding="5"  Name="ExampleImageFileNameTextBox"/>
+                                        <Button x:Name="ExampleImageBrowseButton" Grid.Column="1" Content="Select file" HorizontalAlignment="Left"  Margin="5,5,0,5"  Width="100"  Click="ExampleImageBrowseButton_Click" />
+                                    </Grid>
+                                    <ComboBox DockPanel.Dock="Bottom" 
+                                              Visibility="Collapsed" 
+                                              HorizontalContentAlignment="Stretch" 
+                                              Name="MatchCategoryAndValueComboBox">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>
                                                 <DockPanel>

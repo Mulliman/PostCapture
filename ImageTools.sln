@@ -41,6 +41,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Docs", "Docs\", "{1D8774E0-
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "50960"
+		SlnRelativePath = "Docs\"
 	EndProjectSection
 EndProject
 Global

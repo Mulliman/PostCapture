@@ -3,19 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Border", "Border\Border.csproj", "{D37D0694-EDF9-4156-B105-5CC88131032F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Border", "Legacy\Border\Border.csproj", "{D37D0694-EDF9-4156-B105-5CC88131032F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoubleBorder", "DoubleBorder\DoubleBorder.csproj", "{BE297D16-711E-4CF5-A907-EAC95D2E27BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoubleBorder", "Legacy\DoubleBorder\DoubleBorder.csproj", "{BE297D16-711E-4CF5-A907-EAC95D2E27BF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageTools.Core", "ImageTools.Core\ImageTools.Core.csproj", "{04162E6C-350B-44E1-A3FF-D717F1EFC439}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostCapture.Core", "PostCapture.Core\PostCapture.Core.csproj", "{04162E6C-350B-44E1-A3FF-D717F1EFC439}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatermarkBottomLeft", "WatermarkBottomLeft\WatermarkBottomLeft.csproj", "{F6540360-2C99-46EF-A849-05131C7711EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatermarkBottomLeft", "Legacy\WatermarkBottomLeft\WatermarkBottomLeft.csproj", "{F6540360-2C99-46EF-A849-05131C7711EB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatermarkBottomRight", "WatermarkBottomRight\WatermarkBottomRight.csproj", "{216924F4-2068-440C-BCEC-9C6585C21661}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatermarkBottomRight", "Legacy\WatermarkBottomRight\WatermarkBottomRight.csproj", "{216924F4-2068-440C-BCEC-9C6585C21661}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostProcess", "PostProcess\PostProcess.csproj", "{5E5F90AA-BF62-4EF6-9D28-A33C724477D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostCapture.Process", "PostCapture.Process\PostCapture.Process.csproj", "{5E5F90AA-BF62-4EF6-9D28-A33C724477D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageTools.Configurator", "ImageTools.Configurator\ImageTools.Configurator.csproj", "{B80FA184-B521-4DC0-9CA3-F362FAB3C00E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostCapture.Studio", "PostCapture.Studio\PostCapture.Studio.csproj", "{B80FA184-B521-4DC0-9CA3-F362FAB3C00E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Legacy", "Legacy", "{0B40BDF4-CA3D-4134-B65C-ECB9DA1373C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostCapture.CaptureOne", "PostCapture.CaptureOne\PostCapture.CaptureOne.csproj", "{F2212AB1-8B5D-4125-B4CA-61D53AE91D0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,9 +55,19 @@ Global
 		{B80FA184-B521-4DC0-9CA3-F362FAB3C00E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B80FA184-B521-4DC0-9CA3-F362FAB3C00E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B80FA184-B521-4DC0-9CA3-F362FAB3C00E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2212AB1-8B5D-4125-B4CA-61D53AE91D0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2212AB1-8B5D-4125-B4CA-61D53AE91D0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2212AB1-8B5D-4125-B4CA-61D53AE91D0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2212AB1-8B5D-4125-B4CA-61D53AE91D0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D37D0694-EDF9-4156-B105-5CC88131032F} = {0B40BDF4-CA3D-4134-B65C-ECB9DA1373C0}
+		{BE297D16-711E-4CF5-A907-EAC95D2E27BF} = {0B40BDF4-CA3D-4134-B65C-ECB9DA1373C0}
+		{F6540360-2C99-46EF-A849-05131C7711EB} = {0B40BDF4-CA3D-4134-B65C-ECB9DA1373C0}
+		{216924F4-2068-440C-BCEC-9C6585C21661} = {0B40BDF4-CA3D-4134-B65C-ECB9DA1373C0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ED2BF9B5-AA53-4C57-BEF2-F68737E889F3}

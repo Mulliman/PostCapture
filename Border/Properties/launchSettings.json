@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Border": {
-      "commandName": "Project",
-      "commandLineArgs": "\"C:\\Camera\\2020\\Disney\\Output\\SAM06282 1.jpg\""
-    }
-  }
-}

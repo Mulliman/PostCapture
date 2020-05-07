@@ -1,0 +1,102 @@
+﻿<local:ApplierFormUserControl x:Class="PostCapture.Studio.ApplierForms.WatermarkForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PostCapture.Studio.ApplierForms"
+             mc:Ignorable="d" Padding="10" Margin="0, 0, 0, 1" Background="{StaticResource BackgroundColour}">
+    <Grid>
+        <Expander IsExpanded="True" Name="WatermarkExpander">
+            <Expander.Header>
+                <Grid Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Expander}}, Path=ActualWidth}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" HorizontalAlignment="Stretch">
+                        <TextBlock Foreground="{StaticResource CaptureDoneOrangeBrush}">Watermark</TextBlock>
+                    </Label>
+                    
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="0, 0, 30, 0" HorizontalAlignment="Right">
+                        <Button Style="{StaticResource Small}"
+                            Width="30"
+                            Margin="3" 
+                            Padding="1" 
+                            FontSize="10" 
+                            VerticalContentAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Click="MoveUp_Click">
+                            ▲
+                        </Button>
+                        <Button Style="{StaticResource Small}"
+                            Width="30"
+                            Margin="3" 
+                            Padding="1" 
+                            FontSize="10" 
+                            VerticalContentAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Click="MoveDown_Click">
+                            ▼
+                        </Button>
+
+                        <Button Style="{StaticResource Small}" 
+                            Width="50"
+                            Margin="3" 
+                            Padding="1" 
+                            FontSize="10" 
+                            VerticalContentAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Click="DeleteButton_Click">
+                            Remove
+                        </Button>
+
+                    </StackPanel>
+                </Grid>
+            </Expander.Header>
+
+            <StackPanel>
+                <StackPanel Margin="10,0">
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <Label FontWeight="Bold" HorizontalAlignment="Left"  Padding="0, 5" >Image</Label>
+                            <Button x:Name="BrowseButton" Content="Select file" HorizontalAlignment="Left"  Margin="0, 5"  Width="100"  Click="BrowseButton_Click" />
+                            <TextBox Text="{Binding WatermarkImage}" HorizontalAlignment="Left" Margin="0, 5" Padding="5"  Name="FileNameTextBox"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <Image MaxWidth="100" Name="ExampleImage" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10" MouseDown="BrowseButton_Click" Cursor="Hand" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+
+                <DockPanel VerticalAlignment="Center" Margin="10,0">
+                    <Label  FontWeight="Bold" DockPanel.Dock="Top" Padding="0, 10, 0, 5" Content="Location &amp; Size"></Label>
+                    <StackPanel>
+                        <DockPanel Margin="2">
+                            <Label DockPanel.Dock="Left" FontWeight="Bold" VerticalAlignment="Center" Width="75">Margin %:</Label>
+                            <TextBox Text="{Binding ElementName=MarginSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" DockPanel.Dock="Right" TextAlignment="Right" Width="40" Margin="10,0,0,0"  />
+                            <Slider Maximum="20" TickFrequency="0.25" IsSnapToTickEnabled="True" Name="MarginSlider" VerticalAlignment="Center" Value="{Binding PercentageMargin}" ValueChanged="ValueChanged" />
+                        </DockPanel>
+
+                        <DockPanel Margin="2">
+                            <Label DockPanel.Dock="Left" FontWeight="Bold" VerticalAlignment="Center" Width="75">Size %:</Label>
+                            <TextBox Text="{Binding ElementName=SizeSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" DockPanel.Dock="Right" TextAlignment="Right" Width="40"  Margin="10,0,0,0" />
+                            <Slider Maximum="100" TickFrequency="1" IsSnapToTickEnabled="True" Name="SizeSlider" VerticalAlignment="Center" Value="{Binding PercentageSize}" ValueChanged="ValueChanged" />
+                        </DockPanel>
+
+                        <DockPanel Margin="2">
+                            <Label DockPanel.Dock="Left" FontWeight="Bold" VerticalAlignment="Center" Width="75">Location:</Label>
+                            <ComboBox Name="LocationComboBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" SelectedItem="{Binding Location}" SelectionChanged="ValueChanged" />
+                        </DockPanel>
+                    </StackPanel>
+                </DockPanel>
+            </StackPanel>
+        </Expander>
+    </Grid>
+</local:ApplierFormUserControl>

@@ -1,0 +1,1 @@
+﻿Process files will be stored here in the JSON format shown in json.example.

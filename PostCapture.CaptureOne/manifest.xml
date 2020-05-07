@@ -1,0 +1,9 @@
+﻿<settings>
+  <id>uk.co.sammullins.captureone.postcapture</id>
+  <name>PostCapture</name>
+  <description>Once you are finished editing, add some final touches such as watermarks and borders based on metadata.</description>
+  <manufacturer>Sam Mullins</manufacturer>
+  <entryPoint>Plugin</entryPoint>
+  <version>0.1</version>
+  <supportUrl>https://www.phaseone.com/support</supportUrl>
+</settings>

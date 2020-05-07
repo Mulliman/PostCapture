@@ -21,6 +21,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Legacy", "Legacy", "{0B40BD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostCapture.CaptureOne", "PostCapture.CaptureOne\PostCapture.CaptureOne.csproj", "{F2212AB1-8B5D-4125-B4CA-61D53AE91D0A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{43B2FDBC-C9F4-41C4-8EE8-6408BEE7BBF9}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Docs", "Docs\", "{1D8774E0-0D8A-438A-A3FD-912DD52EA95A}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_50960"
+		Debug.AspNetCompiler.PhysicalPath = "Docs\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50960\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_50960"
+		Release.AspNetCompiler.PhysicalPath = "Docs\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50960\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "50960"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +81,10 @@ Global
 		{F2212AB1-8B5D-4125-B4CA-61D53AE91D0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2212AB1-8B5D-4125-B4CA-61D53AE91D0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2212AB1-8B5D-4125-B4CA-61D53AE91D0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D8774E0-0D8A-438A-A3FD-912DD52EA95A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D8774E0-0D8A-438A-A3FD-912DD52EA95A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D8774E0-0D8A-438A-A3FD-912DD52EA95A}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D8774E0-0D8A-438A-A3FD-912DD52EA95A}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +94,7 @@ Global
 		{BE297D16-711E-4CF5-A907-EAC95D2E27BF} = {0B40BDF4-CA3D-4134-B65C-ECB9DA1373C0}
 		{F6540360-2C99-46EF-A849-05131C7711EB} = {0B40BDF4-CA3D-4134-B65C-ECB9DA1373C0}
 		{216924F4-2068-440C-BCEC-9C6585C21661} = {0B40BDF4-CA3D-4134-B65C-ECB9DA1373C0}
+		{1D8774E0-0D8A-438A-A3FD-912DD52EA95A} = {43B2FDBC-C9F4-41C4-8EE8-6408BEE7BBF9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ED2BF9B5-AA53-4C57-BEF2-F68737E889F3}

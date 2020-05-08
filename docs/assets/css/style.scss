@@ -8,7 +8,7 @@ $header-bg-color-secondary: #2D2D2D !default;
 
 // Text
 $section-headings-color: #FF8A16 !default;
-$body-text-color: #EEE !default;
+$body-text-color: #CCC !default;
 $body-link-color: #FF8A16 !default;
 $blockquote-text-color: #DDD !default;
 
@@ -32,9 +32,30 @@ body {
     font-family: 'Asap', Arial, sans-serif;
 }
 
+li{
+    margin-bottom:10px;
+}
 
 .page-header {
     .logo {
         max-width:300px;
+    }
+}
+
+
+/* Youtube */
+.youtube-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+    margin-bottom:30px;
+
+    iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
     }
 }

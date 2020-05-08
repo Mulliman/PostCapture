@@ -23,6 +23,10 @@ $hr-border-color: #666 !default;
 
 @import "{{ site.theme }}";
 
+#skip-to-content{
+    display:none;
+}
+
 body {
     background-color: #191919;
     font-family: 'Asap', Arial, sans-serif;

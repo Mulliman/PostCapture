@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PhaseOne.Plugin">
-      <HintPath>..\lib\PhaseOne.Plugin.dll</HintPath>
+      <HintPath>.\PhaseOne.Plugin.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />

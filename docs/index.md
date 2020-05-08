@@ -53,3 +53,34 @@ Once selected the drop down list will contain all the metadata categories and va
 1. To run the image processor included in PostCapture all you need to do is drag the selected image on top of the file "PostCapture.Process.exe".
 1. The two images shown here have different metadata and because of the two processes setup above you can see that the output is different.
 1. In the current beta version you can only do one image at a time, but you'll be able to do multiple soon.
+
+# Capture One
+
+## Installation
+
+PostCapture was designed to work with Capture One, and installing it is very simple.
+
+<div class="youtube-container">
+<iframe src="https://www.youtube.com/embed/SasSxpPfL8U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+1. <a href="{{ site.github.zip_url }}/assets/releases/PostCapture.CaptureOne.coplugin">Download the coplugin here</a>
+1. Open Capture One and open preferences from the edit menu.
+1. Select the plugins tabs press the plus button bottom left.
+1. Choose the downloaded coplugin file and press open.
+1. PostCapture is now installed.
+1. Press 'Open Configurator' to ensure that the studio opens successfully. 
+
+## Opening PostCapture Studio from Capture One
+
+As seen above, you can open the studio from the plugins section in the user preferences, but you can also use Capture One's open with functionality on JPEGs or edit with if you export as a JPEG.
+The benefit of this approach is that the 'Populate rule from example image' section will be pre-filled with data from the selected image.
+
+<div class="youtube-container">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RqI4tz8QYTo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+1. Right click on a JPEG image and hover over Open With and choose 'Set up PostCapture process'.
+1. If your image is not a JPEG, you need to use Capture One's 'edit with' menu instead and export as a JPEG. 
+This created image will only be temporarily stored until the next time you use any of the 'edit with' options shipped with PostCapture. 
+In the metadata options of this export dialog, make sure you have 'Rating and Color Tag' checked if you want to use those tags in your processes.

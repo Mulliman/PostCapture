@@ -21,6 +21,8 @@ namespace PostCapture.CaptureOne
 
         public string PostProcessProgramPath { get; set; }
 
+        public string TempImagesPath { get; set; }
+
         private static readonly BitmapSource Icon = GetImage(Environment.CurrentDirectory + "/miniIcon.png");
 
         private readonly PluginAction _openConfiguratorAction = new PluginAction(
@@ -42,6 +44,7 @@ namespace PostCapture.CaptureOne
             _rootDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             ManagementProgramPath = Path.Combine(_rootDirectory, "PostCapture.Studio.exe");
             PostProcessProgramPath = Path.Combine(_rootDirectory, "PostCapture.Process.exe");
+            TempImagesPath = Path.Combine(_rootDirectory, "TempExampleImages");
         }
 
         #region ISettingsPlugin
@@ -131,14 +134,36 @@ namespace PostCapture.CaptureOne
 
         public PluginActionImageResult StartEditingTask(FileHandlingPluginTask argPluginTask, ReportProgress argProgress)
         {
+            var paths = new List<string>();
+
             if (argPluginTask.PluginAction.Identifier == _openConfiguratorAction.Identifier)
             {
-                StartPostCaptureStudio(argPluginTask);
+                // Clear down after last run.
+                var dir = new DirectoryInfo(TempImagesPath);
+                foreach (FileInfo file in dir.GetFiles())
+                {
+                    file.Delete();
+                }
+
+                // Populate with new temp images.
+                foreach (var path in argPluginTask.Files)
+                {
+                    var filename = Path.GetFileName(path);
+                    var tempPath = Path.Combine(TempImagesPath, filename);
+                    File.Copy(path, tempPath);
+
+                    paths.Add(tempPath);
+                }
+
+                StartPostCaptureStudio(paths);
+
+                return new PluginActionImageResult();
             }
 
             if (argPluginTask.PluginAction.Identifier == _runProcessAction.Identifier)
             {
                 StartPostCaptureProcessor(argPluginTask);
+                return new PluginActionImageResult(argPluginTask.Files.ToArray());
             }
 
             return new PluginActionImageResult();
@@ -180,22 +205,34 @@ namespace PostCapture.CaptureOne
 
         private void StartPostCaptureProcessor(FileHandlingPluginTask argTask)
         {
-            var files = argTask.Files.Where(f => f != null && (f.EndsWith(".jpeg") || f.EndsWith(".jpg")));
+            StartPostCaptureProcessor(argTask.Files);
+        }
+
+        private void StartPostCaptureProcessor(IEnumerable<string> generatedFiles)
+        {
+            var files = generatedFiles.Where(f => f != null && (f.EndsWith(".jpeg") || f.EndsWith(".jpg")));
 
             if (!files.Any())
             {
                 return;
             }
 
+            // TODO: Make this parallel or use one single process
             foreach (var file in files)
             {
-                Process.Start(PostProcessProgramPath, "\"" + file + "\"");
+                var process = Process.Start(PostProcessProgramPath, "\"" + file + "\"");
+                process.WaitForExit();
             }
         }
 
         private void StartPostCaptureStudio(FileHandlingPluginTask argTask)
         {
-            var firstFile = argTask.Files.FirstOrDefault(f => f != null && (f.EndsWith(".jpeg") || f.EndsWith(".jpg")));
+            StartPostCaptureStudio(argTask.Files);
+        }
+
+        private void StartPostCaptureStudio(IEnumerable<string> generatedFiles)
+        {
+            var firstFile = generatedFiles.FirstOrDefault(f => f != null && (f.EndsWith(".jpeg") || f.EndsWith(".jpg")));
 
             if (firstFile == null)
             {

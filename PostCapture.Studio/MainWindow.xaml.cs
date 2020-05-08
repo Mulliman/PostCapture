@@ -436,7 +436,7 @@ namespace PostCapture.Studio
             }
             catch (Exception)
             {
-                MessageBox.Show("Failed to get metadata for file.");
+                MessageBox.Show("Failed to get metadata for file " + file);
                 MatchCategoryAndValueComboBox.Visibility = Visibility.Collapsed;
             }
         }

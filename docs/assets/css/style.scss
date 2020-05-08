@@ -40,6 +40,31 @@ li{
     .logo {
         max-width:300px;
     }
+
+    .beta{
+        color:#CCC;
+        border:1px solid #ccc;
+        margin-top:3rem;
+        padding:1rem;
+    }
+}
+
+.site-footer {
+    text-align:center;
+
+    .copyright {
+        margin-top:30px;
+        vertical-align: middle;
+        display: flex;
+        justify-content: center;
+        /* align-self: center;    <---- REMOVE */
+        align-items: center;
+
+        img {
+            margin-right: 30px;
+            max-width: 60%;
+        }
+    }
 }
 
 
@@ -49,7 +74,7 @@ li{
     width: 100%;
     height: 0;
     padding-bottom: 56.25%;
-    margin-bottom:30px;
+    margin-bottom: 30px;
 
     iframe {
         position: absolute;

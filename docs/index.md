@@ -54,6 +54,8 @@ Once selected the drop down list will contain all the metadata categories and va
 1. The two images shown here have different metadata and because of the two processes setup above you can see that the output is different.
 1. In the current beta version you can only do one image at a time, but you'll be able to do multiple soon.
 
+<hr style="margin-top:3rem" />
+
 # Capture One
 
 ## Installation
@@ -77,10 +79,41 @@ As seen above, you can open the studio from the plugins section in the user pref
 The benefit of this approach is that the 'Populate rule from example image' section will be pre-filled with data from the selected image.
 
 <div class="youtube-container">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/RqI4tz8QYTo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/RqI4tz8QYTo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 1. Right click on a JPEG image and hover over Open With and choose 'Set up PostCapture process'.
 1. If your image is not a JPEG, you need to use Capture One's 'edit with' menu instead and export as a JPEG. 
 This created image will only be temporarily stored until the next time you use any of the 'edit with' options shipped with PostCapture. 
 In the metadata options of this export dialog, make sure you have 'Rating and Color Tag' checked if you want to use those tags in your processes.
+
+## Running the processor on images from Capture One
+
+There are two ways to directly run the proessor on an image in Capture one, "Open With" and "Edit With".
+If you have a JPEG and want to overwrite the original image with the image processed with PostCapture then choose "Open With".
+It is recommended to use "Edit With" though. This will save the processed image to a new file alongside the original so you can always roll back.
+You can also use "Edit With" to run the process on RAW images or Tiffs which currently aren't supported by PostCapture. Just make sure you choose JPEG as the file type when exporting.
+
+<div class="youtube-container">
+<iframe src="https://www.youtube.com/embed/AW3xLKlumw8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+1. To create a new image with the changes made by PostCapture, right click your image, go to the 'Edit With' menu and click 'Apply PostCapture process'.
+1. Choose JPEG as the format in the 'Basic' tab.
+1. Ensure that any Metadata that your processes use are included by checking the relevant boxes on the 'Metadata' tab.
+1. Press the button and the process will run automatically.
+1. If you want to update the existing image (not recommended) right click your image, go to the 'Open With' menu and click 'Apply PostCapture process'. The process will run automatically.
+
+## Adding the processor to process recipes in Capture One
+
+The recommended approach for using PostCapture is to use it within process recipes in Capture One. This is very easy to do.
+
+<div class="youtube-container">
+<iframe src="https://www.youtube.com/embed/8giv_z026D0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+1. Select the 'Output' tab within Capture One.
+1. Choose the process recipe that you want to add the PostCapture processor to.
+1. In the 'Process Recipe' tool, on the 'basic' tab find the 'Open With' drop down list. Select 'Apply PostCature process'.
+1. Ensure that any Metadata that your processes use are included by checking the relevant boxes on the 'Metadata' tab.
+1. With the images you want to process selected as well as the recipe set up click the process button.

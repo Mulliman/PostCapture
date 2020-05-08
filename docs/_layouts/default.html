@@ -36,24 +36,37 @@
         <!--<h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>-->
         <h2><img class="logo" src="./assets/images/PostCaptureLogoOrange.png" /></h2>
         <h2 class="project-tagline">{{ page.description | default: site.description | default: site.github.project_tagline }}</h2>
-        {% if site.github.is_project_page %}
-        <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
-        {% endif %}
 
         <a href="https://github.com/Mulliman/PostCapture/blob/master/Docs/assets/releases/PostCapture.CaptureOne.coplugin?raw=true" class="btn">Download Capture One Plugin</a>
         <a href="https://github.com/Mulliman/PostCapture/blob/master/Docs/assets/releases/PostCapture.Standalone.zip?raw=true" class="btn">Download Standalone</a>
+
+        {% if site.github.is_project_page %}
+        <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
+        {% endif %}
 
         {% if site.show_downloads %}
         <a href="{{ site.github.zip_url }}" class="btn">Download .zip</a>
         <a href="{{ site.github.tar_url }}" class="btn">Download .tar.gz</a>
         {% endif %}
+
+        <div class="beta">
+            <h2>This is currently a Windows Only Beta release</h2>
+            <p>This is the first release of this tool, and the testing has only been done on my own windows machine, with my own copy of Capture One 20 (Sony).</p>
+            <p>If you do find any issues, or have any feature requests, please add them to the issue tracker <a href="https://github.com/Mulliman/PostCapture/issues">here</a>.</p>
+            <p>This is completely free and open source.</p>
+        </div>
     </header>
 
     <main id="content" class="main-content" role="main">
         {{ content }}
 
         <footer class="site-footer">
-            &copy; Sam Mullins 
+            <a href="https://github.com/Mulliman/PostCapture/blob/master/Docs/assets/releases/PostCapture.CaptureOne.coplugin?raw=true" class="btn">Download Capture One Plugin</a>
+            <a href="https://github.com/Mulliman/PostCapture/blob/master/Docs/assets/releases/PostCapture.Standalone.zip?raw=true" class="btn">Download Standalone</a>
+
+            <div class="copyright">
+                <img class="logo" src="./assets/images/PostCaptureLogoOrange.png" width="200" /> &copy; Sam Mullins
+            </div>
         </footer>
     </main>
 </body>

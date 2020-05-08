@@ -25,4 +25,12 @@ $hr-border-color: #666 !default;
 
 body {
     background-color: #191919;
+    font-family: 'Asap', Arial, sans-serif;
+}
+
+
+.page-header {
+    .logo {
+        max-width:300px;
+    }
 }

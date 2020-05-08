@@ -64,7 +64,7 @@ PostCapture was designed to work with Capture One, and installing it is very sim
 <iframe src="https://www.youtube.com/embed/SasSxpPfL8U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-1. <a href="{{ site.github.zip_url }}/assets/releases/PostCapture.CaptureOne.coplugin">Download the coplugin here</a>
+1. <a href="https://github.com/Mulliman/PostCapture/blob/master/Docs/assets/releases/PostCapture.CaptureOne.coplugin?raw=true">Download the coplugin here</a>
 1. Open Capture One and open preferences from the edit menu.
 1. Select the plugins tabs press the plus button bottom left.
 1. Choose the downloaded coplugin file and press open.

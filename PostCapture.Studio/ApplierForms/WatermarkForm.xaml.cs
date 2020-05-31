@@ -99,6 +99,7 @@ namespace PostCapture.Studio.ApplierForms
 
                 case Location.Bottom:
                 case Location.Top:
+                case Location.Middle:
                 default:
                     ExampleImage.HorizontalAlignment = HorizontalAlignment.Center;
                     break;

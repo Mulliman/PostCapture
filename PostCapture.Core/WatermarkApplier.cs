@@ -105,6 +105,11 @@ namespace PostCapture.Core
                     x = mainImage.Image.Width / 2 - watermark.Image.Width / 2;
                     break;
 
+                case Location.Middle:
+                    x = mainImage.Image.Width / 2 - watermark.Image.Width / 2;
+                    y = mainImage.Image.Height / 2 - watermark.Image.Height / 2;
+                    break;
+
                 case Location.TopLeft:
                 default:
                     // This is the default location
@@ -147,6 +152,7 @@ namespace PostCapture.Core
 
     public enum Location
     {
+        Middle,
         Top,
         TopLeft,
         TopRight,

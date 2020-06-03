@@ -64,11 +64,6 @@ namespace PostCapture.Studio.ApplierForms
         }
     }
 
-    public class FormDeletedEventArgs : EventArgs
-    {
-        public Guid ApplierFormInstanceId { get; set; }
-    }
-
     public class FormMovedEventArgs : EventArgs
     {
         public Guid ApplierFormInstanceId { get; set; }

@@ -112,6 +112,7 @@ namespace PostCapture.Studio
         {
             SelectedProcessFile = ConfigsListBox.SelectedItem as ProcessConfigurationFile;
 
+            ExtraCriteriaPanel.Children.Clear();
             ProcessOperationsPanel.Children.Clear();
 
             if (SelectedProcessFile == null)
@@ -120,6 +121,8 @@ namespace PostCapture.Studio
                 MatchPropertyTextBox.Text = null;
                 MatchValueTextBox.Text = null;
                 PriorityTextBox.Text = null;
+
+                ExtraCriteriaPanel.Children.Clear();
 
                 CreateCopyPanel.Visibility = Visibility.Collapsed;
 
@@ -134,6 +137,14 @@ namespace PostCapture.Studio
             MatchPropertyTextBox.Text = SelectedProcessFile.MatchProperty;
             MatchValueTextBox.Text = SelectedProcessFile.MatchValue;
             PriorityTextBox.Text = SelectedProcessFile.Priority.ToString();
+
+            if(SelectedProcessFile.ExtraMatchCriteria !=null)
+            {
+                foreach (var extraRule in SelectedProcessFile.ExtraMatchCriteria)
+                {
+                    AddRuleToPanel(new MatchCriterionForm(extraRule));
+                }
+            }
 
             foreach (var step in SelectedProcessFile.Steps)
             {
@@ -265,10 +276,23 @@ namespace PostCapture.Studio
                 steps.Add(data);
             }
 
+            
             processFile.Steps = steps;
             processFile.Id = ProcessNameTextBox.Text;
             processFile.MatchProperty = MatchPropertyTextBox.Text;
             processFile.MatchValue = MatchValueTextBox.Text;
+
+            processFile.ExtraMatchCriteria = new List<ExtraMatchCriterion>();
+
+            foreach (var control in ExtraCriteriaPanel.Children.Cast<MatchCriterionForm>())
+            {
+                var data = control.GetData();
+
+                if(data != null)
+                {
+                    processFile.ExtraMatchCriteria.Add(data);
+                }
+            }
 
             var priority = processFile.Priority;
             int.TryParse(PriorityTextBox.Text ?? "0", out priority);
@@ -526,5 +550,34 @@ namespace PostCapture.Studio
         }
 
         #endregion
+
+        private void AddRule_Click(object sender, RoutedEventArgs e)
+        {
+            AddRuleToPanel();
+        }
+
+        private void AddRuleToPanel(MatchCriterionForm form = null)
+        {
+            var control = form ?? new MatchCriterionForm();
+            control.OnDelete += new EventHandler(OnCriterionDeleted);
+
+            ExtraCriteriaPanel.Children.Add(control);
+        }
+
+        private void OnCriterionDeleted(object sender, EventArgs args)
+        {
+            var typedArgs = args as FormDeletedEventArgs;
+            var id = typedArgs.ApplierFormInstanceId;
+
+            foreach (var item in ExtraCriteriaPanel.Children)
+            {
+                var child = item as MatchCriterionForm;
+                if (child.InstanceId == id)
+                {
+                    ExtraCriteriaPanel.Children.Remove(child);
+                    break;
+                }
+            }
+        }
     }
 }

@@ -175,6 +175,22 @@
                                 </StackPanel>
                             </Border>
                         </StackPanel>
+                        
+                        <StackPanel Margin="0" Name="ExtraCriteriaPanel" />
+
+                        <StackPanel Name="ExtraCriteriaBar" Margin="0">
+                            <Border BorderBrush="{StaticResource BackgroundColour}" BorderThickness="0,0,0,1" Padding="10">
+                                <StackPanel>
+                                    <DockPanel Margin="5,10">
+                                        <TextBlock>                                
+                                            <Hyperlink Click="AddRule_Click">
+                                                + Add extra rule
+                                            </Hyperlink>
+                                        </TextBlock>
+                                    </DockPanel>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
 
                         <StackPanel Margin="0">
                             <Label FontWeight="Bold" Margin="15">

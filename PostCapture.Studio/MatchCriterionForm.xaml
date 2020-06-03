@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="PostCapture.Studio.MatchCriterionForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PostCapture.Studio"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel Name="DetailsBar" Margin="0">
+            <Border BorderBrush="{StaticResource BackgroundColour}" BorderThickness="0,0,0,1" Padding="10">
+                <StackPanel>
+                    <DockPanel Margin="5,10">
+                        <Label FontWeight="Bold" DockPanel.Dock="Left">
+                            <TextBlock TextDecorations="Underline">And</TextBlock>
+                        </Label>
+                        <Button Style="{StaticResource Small}" 
+                            Width="50"
+                            Margin="3" 
+                            Padding="1" 
+                            FontSize="10" 
+                            DockPanel.Dock="Right"
+                            VerticalContentAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Click="DeleteButton_Click">
+                            Remove
+                        </Button>
+                    </DockPanel>
+
+                    <!--<DockPanel Margin="5">
+                        <Label Content="The value in this category" Width="175" />
+                        --><!--Text="{Binding SelectedProcessFile.MatchProperty}"--><!--
+                        <TextBox Name="MatchPropertyTextBox"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0" />
+                    </DockPanel>
+                    <DockPanel Margin="5">
+                        <Label Content="Matches this value" Width="175"/>
+                        --><!--Text="{Binding SelectedProcessFile.MatchValue}"--><!--
+                        <TextBox Name="MatchValueTextBox"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0" />
+                    </DockPanel>-->
+
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <DockPanel Grid.Column="0">
+                            <Label Content="Category" />
+                            <TextBox Name="MatchPropertyTextBox"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0" />
+                        </DockPanel>
+                        <DockPanel Grid.Column="1">
+                            <Label Content="Matches" Margin="10,0,0,0" />
+                            <TextBox Name="MatchValueTextBox"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0" />
+                        </DockPanel>
+                        
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
+</UserControl>

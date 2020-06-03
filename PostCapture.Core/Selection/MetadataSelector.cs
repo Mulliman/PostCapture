@@ -47,18 +47,16 @@ namespace PostCapture.Core.Selection
 
         private string GetProcessId(ImageFile imageFile)
         {
-            var availableCategoriesAndValues = GetLoweredCategoryValueDictionary(imageFile);
+            Dictionary<string, string> availableCategoriesAndValues = GetLoweredCategoryValueDictionary(imageFile);
 
             foreach (var config in _configs)
             {
                 var matchCategory = config.MatchProperty?.ToLower();
                 var matchValue = config.MatchValue?.ToLower();
 
-                if (availableCategoriesAndValues.ContainsKey(matchCategory))
+                if (IsCriteriaMatch(availableCategoriesAndValues, matchCategory, matchValue))
                 {
-                    var value = availableCategoriesAndValues[matchCategory];
-
-                    if (value == matchValue)
+                    if(ConfigMatchesAllExtraCriteria(config, availableCategoriesAndValues))
                     {
                         return config.Id;
                     }
@@ -66,6 +64,40 @@ namespace PostCapture.Core.Selection
             }
 
             return null;
+        }
+
+        private bool ConfigMatchesAllExtraCriteria(ProcessConfigurationFile config, Dictionary<string, string> availableCategoriesAndValues)
+        {
+            if(config?.ExtraMatchCriteria?.Any() != true)
+            {
+                // Return true if no extra rules set up.
+                return true;
+            }
+
+            foreach (var rule in config.ExtraMatchCriteria)
+            {
+                var matchCategory = rule.MatchProperty?.ToLower();
+                var matchValue = rule.MatchValue?.ToLower();
+
+                if (!IsCriteriaMatch(availableCategoriesAndValues, matchCategory, matchValue))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool IsCriteriaMatch(Dictionary<string, string> availableCategoriesAndValues, string matchCategory, string matchValue)
+        {
+            if (availableCategoriesAndValues.ContainsKey(matchCategory))
+            {
+                var value = availableCategoriesAndValues[matchCategory];
+
+                return (value == matchValue);
+            }
+
+            return false;
         }
 
         public static Dictionary<string, string> GetCategoryValueDictionary(ImageFile imageFile)

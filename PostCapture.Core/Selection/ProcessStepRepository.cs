@@ -101,9 +101,18 @@ namespace PostCapture.Core.Selection
 
         public string MatchValue { get; set; }
 
+        public List<ExtraMatchCriterion> ExtraMatchCriteria { get; set; }
+
         public int Priority { get; set; }
 
         public List<ProcessStepConfiguration> Steps { get; set; }
+    }
+
+    public class ExtraMatchCriterion
+    {
+        public string MatchProperty { get; set; }
+
+        public string MatchValue { get; set; }
     }
 
     public class ProcessStepConfiguration

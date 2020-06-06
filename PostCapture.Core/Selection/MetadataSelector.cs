@@ -15,7 +15,7 @@ namespace PostCapture.Core.Selection
     public class MetadataSelector
     {
         private List<ProcessConfigurationFile> _configs;
-        public string Folder = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName), "processes");
+        public string Folder = new StorageLocations.AppDataStorageLocation().ProcessesPath;
 
         public MetadataSelector()
         {

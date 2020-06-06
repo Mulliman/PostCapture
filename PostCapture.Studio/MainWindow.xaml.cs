@@ -35,7 +35,7 @@ namespace PostCapture.Studio
 
             DisableEditing();
 
-            var folder = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName), "processes");
+            var folder = new Core.StorageLocations.AppDataStorageLocation().ProcessesPath;
             _processRepo = new ProcessStepRepository(folder);
 
             RefreshProcessListBox();

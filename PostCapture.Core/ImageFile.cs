@@ -62,5 +62,21 @@ namespace PostCapture.Core
 
             return new ImageFile(Path, newImage);
         }
+
+        public void ApplyExistingSettingsToOtherImage(MagickImage otherImage)
+        {
+            otherImage.ColorSpace = Image.ColorSpace;
+            otherImage.ColorType = Image.ColorType;
+            otherImage.Interlace = Image.Interlace;
+            otherImage.Interpolate = Image.Interpolate;
+            otherImage.RenderingIntent = Image.RenderingIntent;
+            otherImage.VirtualPixelMethod = Image.VirtualPixelMethod;
+            otherImage.SetProfile(Image.GetProfile("icc"));
+            otherImage.SetProfile(Image.GetExifProfile());
+            otherImage.SetProfile(Image.Get8BimProfile());
+            otherImage.SetProfile(Image.GetIptcProfile());
+            otherImage.SetProfile(Image.GetXmpProfile());
+            otherImage.SetProfile(Image.GetColorProfile());
+        }
     }
 }

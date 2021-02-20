@@ -18,6 +18,8 @@ namespace PostCapture.Process
 
                 if(_isDebugging)
                 {
+                    Console.WriteLine("Press key to start");
+                    Console.ReadLine();
                     Console.WriteLine(ImagePath);
                 }
 

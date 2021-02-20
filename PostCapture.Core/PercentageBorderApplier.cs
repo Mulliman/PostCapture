@@ -60,10 +60,10 @@ namespace PostCapture.Core
             int newHeight = bmp.Height + borderWidth * 2;
 
             var newImage = new MagickImage(MagickColor.FromRgb(Colour.R, Colour.G, Colour.B), newWidth, newHeight);
+            image.ApplyExistingSettingsToOtherImage(newImage);
 
             using (var clonedOriginal = image.Image.Clone())
             {
-                newImage.SetProfile(clonedOriginal.GetExifProfile());
                 newImage.Composite(clonedOriginal, Gravity.Center);
 
                 image.Image = newImage;

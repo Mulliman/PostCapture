@@ -29,7 +29,7 @@ namespace PostCapture.Core
             Encoder myEncoder = Encoder.Quality;
             EncoderParameters myEncoderParameters = new EncoderParameters(1);
             EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 100L);
-
+           
             myEncoderParameters.Param[0] = myEncoderParameter;
 
             Image.Write(Path);

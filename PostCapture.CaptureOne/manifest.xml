@@ -4,6 +4,6 @@
   <description>Once you are finished editing, add some final touches such as watermarks and borders based on metadata.</description>
   <manufacturer>Sam Mullins</manufacturer>
   <entryPoint>Plugin</entryPoint>
-  <version>0.1</version>
+  <version>0.1.1</version>
   <supportUrl>https://github.com/Mulliman/PostCapture/issues</supportUrl>
 </settings>
